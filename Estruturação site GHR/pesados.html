@@ -480,7 +480,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     </div>
     <div class="hero-img">
       <img src="img/hero-pesados.jpg" width="1200" height="896" fetchpriority="high" alt="Caminhoneiro de braços cruzados em frente ao seu caminhão novo, na beira da estrada">
-      <div class="hero-badge">A PARTIR DE R$ 300.000</div>
+      <div class="hero-badge">A PARTIR DE R$ 220.000</div>
     </div>
   </div>
 </section>
@@ -888,6 +888,22 @@ calcular();
   });
   header.querySelectorAll('nav a').forEach(a => a.addEventListener('click', fechar));
   document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
+})();
+</script>
+
+<script>
+// Conversões: clique no WhatsApp e envio do formulário viram "lead" no GA4 e no Pixel da Meta
+(function () {
+  const pagina = location.pathname.replace(/^\/|\.html$/g, '') || 'inicio';
+  const lead = metodo => {
+    if (window.gtag) gtag('event', 'generate_lead', { method: metodo, pagina: pagina });
+    if (window.fbq) fbq('track', 'Lead', { content_name: pagina, content_category: metodo });
+  };
+  document.addEventListener('click', e => {
+    if (e.target.closest('a[href*="wa.me/"]')) lead('whatsapp');
+  });
+  const form = document.getElementById('formB2B');
+  if (form) form.addEventListener('submit', () => lead('formulario'));
 })();
 </script>
 

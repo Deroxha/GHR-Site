@@ -1054,5 +1054,21 @@ calcular();
 })();
 </script>
 
+<script>
+// Conversões: clique no WhatsApp e envio do formulário viram "lead" no GA4 e no Pixel da Meta
+(function () {
+  const pagina = location.pathname.replace(/^\/|\.html$/g, '') || 'inicio';
+  const lead = metodo => {
+    if (window.gtag) gtag('event', 'generate_lead', { method: metodo, pagina: pagina });
+    if (window.fbq) fbq('track', 'Lead', { content_name: pagina, content_category: metodo });
+  };
+  document.addEventListener('click', e => {
+    if (e.target.closest('a[href*="wa.me/"]')) lead('whatsapp');
+  });
+  const form = document.getElementById('formB2B');
+  if (form) form.addEventListener('submit', () => lead('formulario'));
+})();
+</script>
+
 </body>
 </html>
