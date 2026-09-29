@@ -57,6 +57,23 @@ nav a {
   font-size: 14px; font-weight: 500;
 }
 nav a:hover { color: var(--verde); }
+.menu-toggle {
+  display: none; order: 1; flex-shrink: 0;
+  width: 44px; height: 44px; padding: 0;
+  background: transparent; border: 1px solid var(--borda);
+  cursor: pointer; align-items: center; justify-content: center;
+}
+.menu-toggle span, .menu-toggle span::before, .menu-toggle span::after {
+  display: block; width: 18px; height: 2px; background: var(--escuro);
+  transition: transform 0.2s, background-color 0.2s;
+}
+.menu-toggle span { position: relative; }
+.menu-toggle span::before, .menu-toggle span::after { content: ''; position: absolute; left: 0; }
+.menu-toggle span::before { top: -6px; }
+.menu-toggle span::after { top: 6px; }
+header.menu-aberto .menu-toggle span { background: transparent; }
+header.menu-aberto .menu-toggle span::before { transform: translateY(6px) rotate(45deg); }
+header.menu-aberto .menu-toggle span::after { transform: translateY(-6px) rotate(-45deg); }
 nav a.nav-destaque { display: inline-flex; align-items: center; gap: 7px; }
 nav a.nav-destaque::before {
   content: ''; width: 6px; height: 6px;
@@ -108,18 +125,15 @@ nav a.nav-destaque::before {
   overflow: hidden;
 }
 .hero-visual::before, .hero-visual::after {
-  content: ''; position: absolute;
+  content: ''; position: absolute; z-index: 1;
   width: 40px; height: 40px;
   border: 3px solid var(--verde);
 }
 .hero-visual::before { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
 .hero-visual::after { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
 .hero-visual img {
-  max-width: 85%; max-height: 85%; object-fit: contain;
-}
-.hero-visual .emoji-grid {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
-  font-size: 64px; opacity: 0.9;
+  position: absolute; inset: 0;
+  width: 100%; height: 100%; object-fit: cover;
 }
 
 /* STATS */
@@ -295,25 +309,48 @@ h2 span { color: var(--verde); }
 }
 .prod-img img {
   width: 100%; height: 100%; object-fit: cover;
+  transition: transform 0.4s ease;
 }
-.prod-body { padding: 24px 22px 26px; flex: 1; display: flex; flex-direction: column; }
+.prod-card:hover .prod-img img { transform: scale(1.05); }
+.prod-tag, .prod-prazo {
+  position: absolute; font-family: var(--mono); font-size: 11px;
+  font-weight: 700; letter-spacing: 1.5px; padding: 5px 10px;
+}
+.prod-tag { top: 12px; left: 12px; background: var(--preto); color: var(--verde); }
+.prod-prazo { bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.72); color: var(--branco); }
+.prod-body { padding: 22px 22px 24px; flex: 1; display: flex; flex-direction: column; }
 .prod-body h3 {
-  font-size: 20px; font-weight: 800; margin-bottom: 6px;
+  font-size: 20px; font-weight: 800; margin-bottom: 4px;
 }
 .prod-price {
-  color: var(--verde); font-weight: 800; font-size: 13px;
+  color: #5A6B7A; font-weight: 700; font-size: 12px;
   margin-bottom: 14px; font-family: var(--mono);
 }
+.prod-parcela {
+  padding: 12px 14px; margin-bottom: 16px;
+  background: var(--menta); border-left: 3px solid var(--verde);
+}
+.prod-parcela small {
+  display: block; font-family: var(--mono); font-size: 10px;
+  letter-spacing: 1px; text-transform: uppercase; color: #5A6B7A;
+}
+.prod-parcela strong {
+  display: block; font-size: 26px; font-weight: 900;
+  letter-spacing: -0.5px; color: var(--verde-escuro); line-height: 1.2;
+}
+.prod-parcela strong span { font-size: 13px; font-weight: 700; color: #5A6B7A; letter-spacing: 0; }
+.prod-parcela em { display: block; font-style: normal; font-size: 12px; color: #5A6B7A; margin-top: 2px; }
 .prod-body p {
   font-size: 14px; color: #5A6B7A; margin-bottom: 20px;
   flex: 1;
 }
-.prod-link {
-  color: var(--escuro); font-weight: 800; font-size: 14px;
-  text-decoration: none; border-bottom: 2px solid var(--verde);
-  padding-bottom: 2px; align-self: flex-start;
+.prod-cta {
+  display: block; text-align: center; padding: 13px 16px;
+  background: var(--escuro); color: var(--branco);
+  font-weight: 800; font-size: 14px; text-decoration: none;
+  transition: background 0.15s, color 0.15s;
 }
-.prod-link:hover { color: var(--verde); }
+.prod-card:hover .prod-cta, .prod-cta:focus-visible { background: var(--verde); color: var(--preto); }
 
 /* POR QUE A GHR */
 .ghr-dark { background: var(--preto); color: var(--branco); }
@@ -445,7 +482,16 @@ footer {
   .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 60px; }
   .hero h1 { font-size: 44px; }
   .hero-visual { aspect-ratio: 4/3; }
-  nav { display: none; }
+  .menu-toggle { display: flex; }
+  nav {
+    display: none; position: absolute; top: 100%; left: 0; right: 0;
+    flex-direction: column; align-items: stretch; gap: 0;
+    background: var(--menta-clara); border-bottom: 1px solid var(--borda);
+    padding: 4px 24px 12px; box-shadow: 0 16px 24px rgba(0, 0, 0, 0.06);
+  }
+  header.menu-aberto nav { display: flex; }
+  nav a { padding: 14px 0; font-size: 16px; border-bottom: 1px solid var(--borda); }
+  nav a:last-child { border-bottom: 0; }
   .stats { grid-template-columns: repeat(2, 1fr); }
   .stat:nth-child(2) { border-right: 0; }
   .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--borda); }
@@ -464,6 +510,15 @@ footer {
   .prod-grid { grid-template-columns: 1fr; }
   .cta-header { padding: 10px 14px; font-size: 12px; }
   .logo strong { font-size: 17px; }
+}
+/* Cabeçalho compacto no celular (logo + botão + menu cabem numa linha) */
+@media (max-width: 560px) {
+  header { padding: 12px 16px; }
+  .header-inner { gap: 10px; }
+  .logo div { font-size: 0; }
+  .logo div strong { font-size: 20px; }
+  .cta-header { padding: 10px 12px; font-size: 12px; }
+  nav { padding: 4px 16px 12px; }
 }
 </style>
 
@@ -504,7 +559,8 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
       <span class="logo-diamond">◆</span>
       <div><strong>GHR</strong> Compra Programada</div>
     </a>
-    <nav>
+    <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu-principal"><span></span></button>
+    <nav id="menu-principal">
       <a href="#como-funciona">Como funciona</a>
       <a href="#simulador">Simulador</a>
       <a href="#produtos">Produtos</a>
@@ -528,12 +584,8 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     </div>
   </div>
   <div class="hero-visual">
-    <div class="emoji-grid">
-      <span>🏍️</span>
-      <span>🚗</span>
-      <span>🏠</span>
-      <span>🚛</span>
-    </div>
+    <img src="img/hero-inicio.jpg" width="1024" height="1024" fetchpriority="high"
+         alt="Casal sorrindo com as chaves na mão em frente à casa nova, com carro e moto na garagem">
   </div>
 </section>
 
@@ -655,52 +707,81 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     <h2>Um caminho para <span>cada objetivo.</span></h2>
     <p class="section-sub">Quatro linhas de crédito, todas seguindo a mesma lógica: sem sorteio, com análise flexível para o seu perfil.</p>
 
+    <!-- Valores tirados da menor linha de cada tabela CRED CAR do simulador (TABELAS, no script abaixo) -->
     <div class="prod-grid">
       <div class="prod-card">
         <div class="prod-img">
           <img src="https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Motocicleta" loading="lazy">
+          <span class="prod-tag">MOTO</span>
+          <span class="prod-prazo">80 MESES</span>
         </div>
         <div class="prod-body">
           <h3>Motocicleta</h3>
-          <div class="prod-price">A partir de R$ 25.000</div>
+          <div class="prod-price">Crédito a partir de R$ 20.000</div>
+          <div class="prod-parcela">
+            <small>Parcelas a partir de</small>
+            <strong>R$ 350<span>/mês</span></strong>
+            <em>+ 1ª parcela de R$ 2.750</em>
+          </div>
           <p>Para trabalhar, estudar ou ir mais longe — sem depender do banco.</p>
-          <a href="/moto.html" class="prod-link">Simular moto →</a>
+          <a href="/moto.html" class="prod-cta">Simular moto →</a>
         </div>
       </div>
 
       <div class="prod-card">
         <div class="prod-img">
           <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Automóvel" loading="lazy">
+          <span class="prod-tag">CARRO</span>
+          <span class="prod-prazo">120 MESES</span>
         </div>
         <div class="prod-body">
           <h3>Automóvel</h3>
-          <div class="prod-price">A partir de R$ 120.000</div>
+          <div class="prod-price">Crédito a partir de R$ 100.000</div>
+          <div class="prod-parcela">
+            <small>Parcelas a partir de</small>
+            <strong>R$ 1.000<span>/mês</span></strong>
+            <em>do 1º ao 12º mês; depois R$ 1.296,29</em>
+          </div>
           <p>Ideal para quem já pesquisou financiamento e achou o custo alto demais.</p>
-          <a href="/carro.html" class="prod-link">Simular carro →</a>
+          <a href="/carro.html" class="prod-cta">Simular carro →</a>
         </div>
       </div>
 
       <div class="prod-card">
         <div class="prod-img">
           <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Imóvel Residencial" loading="lazy">
+          <span class="prod-tag">IMÓVEL</span>
+          <span class="prod-prazo">240 MESES</span>
         </div>
         <div class="prod-body">
           <h3>Imóvel Residencial</h3>
-          <div class="prod-price">A partir de R$ 220.000</div>
+          <div class="prod-price">Crédito a partir de R$ 200.000</div>
+          <div class="prod-parcela">
+            <small>Parcelas a partir de</small>
+            <strong>R$ 1.228,07<span>/mês</span></strong>
+            <em>após 12x de R$ 1.500 (plano convencional)</em>
+          </div>
           <p>Planejamento real para sair do aluguel e construir patrimônio.</p>
-          <a href="/imovel.html" class="prod-link">Simular imóvel →</a>
+          <a href="/imovel.html" class="prod-cta">Simular imóvel →</a>
         </div>
       </div>
 
       <div class="prod-card">
         <div class="prod-img">
           <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Veículos Pesados" loading="lazy">
+          <span class="prod-tag">PESADOS</span>
+          <span class="prod-prazo">120 MESES</span>
         </div>
         <div class="prod-body">
           <h3>Veículos Pesados</h3>
-          <div class="prod-price">A partir de R$ 300.000</div>
+          <div class="prod-price">Crédito a partir de R$ 220.000</div>
+          <div class="prod-parcela">
+            <small>Parcelas a partir de</small>
+            <strong>R$ 2.200<span>/mês</span></strong>
+            <em>do 1º ao 12º mês; depois R$ 2.607,40 (plano flex)</em>
+          </div>
           <p>Amplie sua frota ou comece na estrada sem travar o caixa.</p>
-          <a href="/pesados.html" class="prod-link">Simular caminhão →</a>
+          <a href="/pesados.html" class="prod-cta">Simular caminhão →</a>
         </div>
       </div>
     </div>
@@ -1167,6 +1248,27 @@ calcular();
     },
     plugins: [valoresNasBarras]
   });
+})();
+</script>
+
+<script>
+// Menu do celular
+(function () {
+  const header = document.querySelector('header');
+  const botao = header && header.querySelector('.menu-toggle');
+  if (!botao) return;
+  const fechar = () => {
+    header.classList.remove('menu-aberto');
+    botao.setAttribute('aria-expanded', 'false');
+    botao.setAttribute('aria-label', 'Abrir menu');
+  };
+  botao.addEventListener('click', () => {
+    const aberto = header.classList.toggle('menu-aberto');
+    botao.setAttribute('aria-expanded', String(aberto));
+    botao.setAttribute('aria-label', aberto ? 'Fechar menu' : 'Abrir menu');
+  });
+  header.querySelectorAll('nav a').forEach(a => a.addEventListener('click', fechar));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
 })();
 </script>
 
