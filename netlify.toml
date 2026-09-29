@@ -1,0 +1,5 @@
+# Configuração lida pelo Netlify a cada push no GitHub.
+# O site é HTML estático: não há build, só a publicação da pasta abaixo.
+[build]
+  publish = "Estruturação site GHR"
+  command = ""
