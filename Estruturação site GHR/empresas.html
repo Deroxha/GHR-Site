@@ -276,12 +276,33 @@ h2 span { color: var(--verde); }
   outline: none; border-color: var(--verde);
 }
 .form-field textarea { resize: vertical; min-height: 100px; }
+.form-consent {
+  display: flex; align-items: flex-start; gap: 12px;
+}
+.form-consent input {
+  -webkit-appearance: none; appearance: none;
+  flex-shrink: 0; width: 20px; height: 20px; margin: 2px 0 0;
+  border: 2px solid var(--borda); background: var(--branco);
+  cursor: pointer; transition: background-color 0.15s, border-color 0.15s;
+}
+.form-consent input:hover { border-color: var(--verde); }
+.form-consent input:focus-visible {
+  border-color: var(--verde); outline: 2px solid var(--verde); outline-offset: 2px;
+}
+.form-consent input:checked {
+  border-color: var(--verde);
+  background: var(--verde) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8.5l3 3 7-7' fill='none' stroke='%23000' stroke-width='2.5'/%3E%3C/svg%3E") center / 14px no-repeat;
+}
+.form-consent input:user-invalid { border-color: #D64545; }
+.form-consent label {
+  font-size: 13px; line-height: 1.55; color: var(--escuro); cursor: pointer;
+}
 .form-submit {
   width: 100%; padding: 18px;
   background: var(--verde); color: var(--preto);
   border: 0; font-weight: 800; font-size: 16px;
   letter-spacing: 0.5px; cursor: pointer;
-  font-family: inherit; margin-top: 8px;
+  font-family: inherit; margin-top: 24px;
 }
 .form-submit:hover { background: #2AB857; }
 .form-disclaimer {
@@ -718,6 +739,10 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
             <label for="mensagem">Conte um pouco sobre sua necessidade</label>
             <textarea id="mensagem" name="mensagem" placeholder="Ex: preciso renovar 3 caminhões, ou quero começar como parceiro..."></textarea>
           </div>
+        </div>
+        <div class="form-consent">
+          <input type="checkbox" id="consentimento" name="consentimento_lgpd" value="sim" required>
+          <label for="consentimento">Autorizo a GHR Compra Programada a entrar em contato comigo e concordo com o tratamento dos meus dados conforme a LGPD.</label>
         </div>
         <button type="submit" class="form-submit">Enviar solicitação</button>
         <p class="form-disclaimer">

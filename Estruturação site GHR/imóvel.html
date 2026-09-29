@@ -50,6 +50,11 @@ header {
 nav { display: flex; gap: 24px; align-items: center; }
 nav a { color: var(--escuro); text-decoration: none; font-size: 14px; font-weight: 500; }
 nav a:hover { color: var(--verde); }
+nav a.nav-destaque { display: inline-flex; align-items: center; gap: 7px; }
+nav a.nav-destaque::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--verde); transform: rotate(45deg);
+}
 .cta-header {
   background: var(--verde); color: var(--preto);
   padding: 12px 20px; font-weight: 800; font-size: 13px;
@@ -405,6 +410,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
       <a href="/">Início</a>
       <a href="/moto.html">Moto</a>
       <a href="/carro.html">Carro</a>
+      <a href="/empresas.html" class="nav-destaque">Para Empresas</a>
       <a href="/pesados.html">Pesados</a>
     </nav>
     <a href="https://wa.me/5531971746067?text=Ol%C3%A1%21%20Quero%20simular%20um%20im%C3%B3vel%20pela%20GHR." class="cta-header" target="_blank">Simular imóvel →</a>

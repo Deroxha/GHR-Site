@@ -57,6 +57,11 @@ nav a {
   font-size: 14px; font-weight: 500;
 }
 nav a:hover { color: var(--verde); }
+nav a.nav-destaque { display: inline-flex; align-items: center; gap: 7px; }
+nav a.nav-destaque::before {
+  content: ''; width: 6px; height: 6px;
+  background: var(--verde); transform: rotate(45deg);
+}
 .cta-header {
   background: var(--verde); color: var(--preto);
   padding: 12px 20px; font-weight: 800; font-size: 13px;
@@ -178,6 +183,14 @@ h2 span { color: var(--verde); }
   border-left: 3px solid var(--verde);
   background: rgba(51, 204, 102, 0.06);
   font-size: 15px; color: #C0D0C8;
+}
+.funciona-grafico {
+  max-width: 600px; margin-top: 32px; padding: 24px;
+  border: 1px solid #2A3540; background: rgba(255,255,255,0.02);
+}
+.funciona-grafico-area { position: relative; width: 100%; aspect-ratio: 4 / 3; }
+.funciona-grafico-nota {
+  margin-top: 14px; font-size: 12px; line-height: 1.5; color: #7A8794;
 }
 
 /* CALCULADORA */
@@ -496,6 +509,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
       <a href="#simulador">Simulador</a>
       <a href="#produtos">Produtos</a>
       <a href="#por-que">Por que a GHR</a>
+      <a href="/empresas.html" class="nav-destaque">Para Empresas</a>
       <a href="#faq">Dúvidas</a>
     </nav>
     <a href="https://wa.me/5531971746067?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20GHR%20e%20quero%20uma%20simula%C3%A7%C3%A3o." class="cta-header" target="_blank">Simular agora →</a>
@@ -567,6 +581,13 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
     <div class="funciona-nota">
       <strong>Só duas coisas podem ser prometidas como certeza:</strong> a data contratual e a regra dos 50% a partir do 3º mês. Qualquer outra forma de antecipação é sempre apresentada como possibilidade.
+    </div>
+
+    <div class="funciona-grafico">
+      <div class="funciona-grafico-area">
+        <canvas id="graficoComparativo" role="img" aria-label="Gráfico comparando o total pago em um financiamento bancário e na Compra Programada para um crédito de R$ 60.000"></canvas>
+      </div>
+      <p class="funciona-grafico-nota" id="graficoNota"></p>
     </div>
   </div>
 </section>
@@ -1054,6 +1075,99 @@ document.querySelectorAll('.faq-q').forEach(q => {
 popularPlanos();
 atualizarRange();
 calcular();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+// ============ GRÁFICO COMPARATIVO (seção Como funciona) ============
+(function () {
+  const CREDITO = 60000;
+  const FIN_TAXA_MES = 0.018;   // 1,8% ao mês
+  const FIN_PRAZO = 60;         // meses
+  const TAXA_ADM = 0.15;        // taxa de administração estimada
+
+  // Financiamento pela tabela Price: parcela = PV * i / (1 - (1 + i)^-n)
+  const parcelaFin = CREDITO * FIN_TAXA_MES / (1 - Math.pow(1 + FIN_TAXA_MES, -FIN_PRAZO));
+  const totalFin = Math.round(parcelaFin * FIN_PRAZO);
+  const totalCP = Math.round(CREDITO * (1 + TAXA_ADM));
+
+  const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
+
+  document.getElementById('graficoNota').textContent =
+    `Simulação ilustrativa para crédito de ${brl(CREDITO)}. Financiamento: ${FIN_PRAZO}x de ${brl(parcelaFin)} ` +
+    `a ${(FIN_TAXA_MES * 100).toLocaleString('pt-BR')}% a.m. (tabela Price). Compra Programada: crédito + taxa de ` +
+    `administração estimada de ${TAXA_ADM * 100}%. Não inclui seguros, fundo de reserva ou reajustes.`;
+
+  const canvas = document.getElementById('graficoComparativo');
+  if (!window.Chart || !canvas) return;
+  Chart.defaults.font.family = "-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif";
+
+  // Escreve o valor em cima de cada barra (útil no celular, onde não há hover)
+  const valoresNasBarras = {
+    id: 'valoresNasBarras',
+    afterDatasetsDraw(chart) {
+      const { ctx } = chart;
+      ctx.save();
+      ctx.font = "800 15px -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif";
+      ctx.fillStyle = '#FFFFFF';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'bottom';
+      chart.getDatasetMeta(0).data.forEach((barra, i) => {
+        ctx.fillText(brl(chart.data.datasets[0].data[i]), barra.x, barra.y - 8);
+      });
+      ctx.restore();
+    }
+  };
+
+  new Chart(canvas, {
+    type: 'bar',
+    data: {
+      labels: ['Financiamento bancário', 'Compra Programada'],
+      datasets: [{
+        data: [totalFin, totalCP],
+        backgroundColor: ['#C53030', '#33CC66'],
+        borderWidth: 0,
+        maxBarThickness: 140
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        title: {
+          display: true,
+          text: 'Quanto você paga de verdade',
+          color: '#FFFFFF',
+          align: 'start',
+          font: { size: 18, weight: '800' },
+          padding: { bottom: 20 }
+        },
+        tooltip: {
+          callbacks: { label: item => ' Total pago: ' + brl(item.raw) }
+        }
+      },
+      scales: {
+        x: {
+          ticks: { color: '#FFFFFF', font: { size: 13, weight: '700' } },
+          grid: { display: false },
+          border: { color: '#2A3540' }
+        },
+        y: {
+          beginAtZero: true,
+          suggestedMax: Math.max(totalFin, totalCP) * 1.15,  // espaço para o valor acima da barra
+          ticks: {
+            color: '#A0A8B0',
+            callback: v => 'R$ ' + (v / 1000).toLocaleString('pt-BR') + ' mil'
+          },
+          grid: { color: 'rgba(255,255,255,0.08)' },
+          border: { display: false }
+        }
+      }
+    },
+    plugins: [valoresNasBarras]
+  });
+})();
 </script>
 
 </body>
