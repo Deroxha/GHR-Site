@@ -9,6 +9,10 @@
 <meta property="og:description" content="Moto 0km com data de entrega definida em contrato. Sem sorteio.">
 <meta property="og:type" content="website">
 
+<meta property="og:image" content="https://ghrcompraprogramada.netlify.app/assets/catalogos/honda-xre-190.jpg">
+<meta name="theme-color" content="#0B3D1A">
+<link rel="canonical" href="https://ghrcompraprogramada.netlify.app/moto.html">
+
 <style>
 :root {
   --verde: #33CC66;
@@ -23,6 +27,11 @@
   --mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--verde); outline-offset: 3px;
+}
+.wa-float svg { width: 28px; height: 28px; fill: currentColor; }
 html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
@@ -384,6 +393,11 @@ footer {
   .calc-wrap { padding: 32px 24px; }
   .wa-float { display: flex; }
 }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
 /* Cabeçalho compacto no celular (logo + botão + menu cabem numa linha) */
 @media (max-width: 560px) {
   header { padding: 12px 16px; }
@@ -458,7 +472,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     </div>
     <div class="hero-img">
       <!-- ⚠️ SUBSTITUA pela sua imagem da CG 160 -->
-      <img src="https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Motocicleta 0km para trabalho">
+      <img src="/assets/catalogos/honda-xre-190.jpg" alt="Motocicleta Honda XRE 190 0km">
       <div class="hero-badge">A PARTIR DE R$ 25.000</div>
     </div>
   </div>
@@ -521,7 +535,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     <div class="modelos-grid">
       <div class="modelo-card">
         <div class="img-wrap">
-          <img src="https://images.pexels.com/photos/1119796/pexels-photo-1119796.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Moto de entrada" loading="lazy">
+          <img src="/assets/catalogos/honda-xre-190.jpg" alt="Honda XRE 190" loading="lazy">
         </div>
         <h3>Crédito de R$ 25.000</h3>
         <div class="credito">// PLANO 80X · OPÇÃO A</div>
@@ -534,7 +548,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
       <div class="modelo-card">
         <div class="img-wrap">
-          <img src="https://images.pexels.com/photos/2393821/pexels-photo-2393821.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Moto intermediária" loading="lazy">
+          <img src="/assets/creditos/moto.jpeg" alt="Moto intermediária" loading="lazy">
         </div>
         <h3>Crédito de R$ 40.000</h3>
         <div class="credito">// PLANO 80X · OPÇÃO B</div>
@@ -547,7 +561,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
       <div class="modelo-card">
         <div class="img-wrap">
-          <img src="https://images.pexels.com/photos/2519374/pexels-photo-2519374.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Moto premium" loading="lazy">
+          <img src="/assets/catalogos/honda-xre-190.jpg" alt="Moto premium" loading="lazy">
         </div>
         <h3>Crédito de R$ 60.000</h3>
         <div class="credito">// PLANO 80X · OPÇÃO A</div>
@@ -697,7 +711,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Falar com a GHR pelo WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3A12.9 12.9 0 0 0 5.1 22.72L3.37 29l6.42-1.68A12.96 12.96 0 1 0 16.04 3Zm0 23.73a10.72 10.72 0 0 1-5.47-1.5l-.39-.23-3.8 1 1.02-3.7-.25-.38a10.77 10.77 0 1 1 8.89 4.81Zm5.9-8.06c-.32-.16-1.91-.94-2.2-1.05-.3-.11-.52-.16-.73.16-.22.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.33-.16-1.37-.5-2.6-1.61a9.77 9.77 0 0 1-1.8-2.24c-.19-.32-.02-.5.14-.66.15-.14.33-.38.49-.57.16-.19.21-.32.32-.54.11-.21.06-.4-.02-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.33-1.14 1.11-1.14 2.7 0 1.6 1.16 3.14 1.32 3.35.16.22 2.28 3.49 5.53 4.9.77.33 1.37.53 1.84.68.77.25 1.48.21 2.03.13.62-.1 1.92-.79 2.19-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.38Z"/></svg></a>
 
 <script>
 // TABELA MOTO 80X — dados reais CRED CAR

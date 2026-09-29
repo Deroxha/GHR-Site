@@ -8,6 +8,12 @@
 <meta property="og:title" content="GHR para Empresas — Frota própria sem travar o caixa">
 <meta property="og:description" content="Compra Programada corporativa. Programa de parcerias para vendedores.">
 
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ghrcompraprogramada.netlify.app/empresas.html">
+<meta property="og:image" content="https://ghrcompraprogramada.netlify.app/assets/catalogos/fh540-estrada.jpg">
+<meta name="theme-color" content="#0B3D1A">
+<link rel="canonical" href="https://ghrcompraprogramada.netlify.app/empresas.html">
+
 <style>
 :root {
   --verde: #33CC66;
@@ -22,6 +28,11 @@
   --mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--verde); outline-offset: 3px;
+}
+.wa-float svg { width: 28px; height: 28px; fill: currentColor; }
 html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
@@ -428,6 +439,11 @@ footer {
   .calc-wrap, .form-wrap { padding: 32px 24px; }
   .wa-float { display: flex; }
 }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
 /* Cabeçalho compacto no celular (logo + botão + menu cabem numa linha) */
 @media (max-width: 560px) {
   header { padding: 12px 16px; }
@@ -499,7 +515,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
       </div>
     </div>
     <div style="aspect-ratio: 4/3; background: rgba(255,255,255,0.03); border: 1px solid rgba(51,204,102,0.3); overflow: hidden;">
-      <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Frota de veículos pesados" style="width:100%;height:100%;object-fit:cover;">
+      <img src="/assets/catalogos/fh540-estrada.jpg" alt="Caminhão Volvo FH 540 para frota empresarial" style="width:100%;height:100%;object-fit:cover;">
     </div>
   </div>
 </section>
@@ -740,7 +756,9 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     <p class="section-sub">Preencha o formulário e nossa equipe entra em contato para entender a necessidade da sua empresa ou do seu perfil como parceiro.</p>
 
     <div class="form-wrap">
-      <form id="formB2B" netlify>
+      <form id="formB2B" name="proposta-b2b" method="POST" data-netlify="true" netlify-honeypot="bot-field">
+        <input type="hidden" name="form-name" value="proposta-b2b">
+        <p hidden><label>Não preencha este campo: <input name="bot-field"></label></p>
         <div class="form-grid">
           <div class="form-field full">
             <label for="nome">Nome completo *</label>
@@ -875,7 +893,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
   </div>
 </footer>
 
-<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Falar com a GHR pelo WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3A12.9 12.9 0 0 0 5.1 22.72L3.37 29l6.42-1.68A12.96 12.96 0 1 0 16.04 3Zm0 23.73a10.72 10.72 0 0 1-5.47-1.5l-.39-.23-3.8 1 1.02-3.7-.25-.38a10.77 10.77 0 1 1 8.89 4.81Zm5.9-8.06c-.32-.16-1.91-.94-2.2-1.05-.3-.11-.52-.16-.73.16-.22.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.33-.16-1.37-.5-2.6-1.61a9.77 9.77 0 0 1-1.8-2.24c-.19-.32-.02-.5.14-.66.15-.14.33-.38.49-.57.16-.19.21-.32.32-.54.11-.21.06-.4-.02-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.33-1.14 1.11-1.14 2.7 0 1.6 1.16 3.14 1.32 3.35.16.22 2.28 3.49 5.53 4.9.77.33 1.37.53 1.84.68.77.25 1.48.21 2.03.13.62-.1 1.92-.79 2.19-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.38Z"/></svg></a>
 
 <script>
 // TABELAS PARA SIMULADOR CORPORATIVO

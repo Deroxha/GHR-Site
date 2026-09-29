@@ -10,6 +10,10 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://ghrcompraprogramada.netlify.app">
 
+<meta property="og:image" content="https://ghrcompraprogramada.netlify.app/img/hero-inicio.jpg">
+<meta name="theme-color" content="#0B3D1A">
+<link rel="canonical" href="https://ghrcompraprogramada.netlify.app/">
+
 <style>
 :root {
   --verde: #33CC66;
@@ -24,6 +28,11 @@
   --mono: 'JetBrains Mono', 'Courier New', monospace;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
+img { display: block; max-width: 100%; }
+a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--verde); outline-offset: 3px;
+}
+.wa-float svg { width: 28px; height: 28px; fill: currentColor; }
 html { scroll-behavior: smooth; }
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
@@ -235,7 +244,12 @@ h2 span { color: var(--verde); }
 }
 .mod-btn:hover { border-color: var(--verde); }
 .mod-btn.active { background: var(--escuro); color: var(--branco); border-color: var(--escuro); }
-.mod-btn .emoji { display: block; font-size: 22px; margin-bottom: 6px; }
+.mod-btn .credit-thumb {
+  display: block; width: 52px; height: 38px;
+  margin: 0 auto 8px; object-fit: cover;
+  border: 1px solid var(--borda);
+}
+.mod-btn.active .credit-thumb { border-color: var(--verde); }
 
 .field { margin-bottom: 24px; }
 .field label {
@@ -511,6 +525,11 @@ footer {
   .cta-header { padding: 10px 14px; font-size: 12px; }
   .logo strong { font-size: 17px; }
 }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
 /* Cabeçalho compacto no celular (logo + botão + menu cabem numa linha) */
 @media (max-width: 560px) {
   header { padding: 12px 16px; }
@@ -653,10 +672,10 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
       <p class="section-sub">Escolha a modalidade, o valor do crédito e veja a estimativa. Sem compromisso.</p>
 
       <div class="mod-grid" id="modGrid">
-        <button class="mod-btn active" data-mod="moto"><span class="emoji">🏍️</span>Moto</button>
-        <button class="mod-btn" data-mod="carro"><span class="emoji">🚗</span>Carro</button>
-        <button class="mod-btn" data-mod="imovel"><span class="emoji">🏠</span>Imóvel</button>
-        <button class="mod-btn" data-mod="pesados"><span class="emoji">🚛</span>Pesados</button>
+        <button class="mod-btn active" data-mod="moto"><img class="credit-thumb" src="/assets/catalogos/honda-xre-190.jpg" alt="">Moto</button>
+        <button class="mod-btn" data-mod="carro"><img class="credit-thumb" src="/assets/catalogos/fiat-strada.jpg" alt="">Carro</button>
+        <button class="mod-btn" data-mod="imovel"><img class="credit-thumb" src="/assets/catalogos/imovel-alto-padrao.webp" alt="">Imóvel</button>
+        <button class="mod-btn" data-mod="pesados"><img class="credit-thumb" src="/assets/catalogos/fh540-estrada.jpg" alt="">Pesados</button>
       </div>
 
       <div class="field">
@@ -711,7 +730,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
     <div class="prod-grid">
       <div class="prod-card">
         <div class="prod-img">
-          <img src="https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Motocicleta" loading="lazy">
+          <img src="/assets/catalogos/honda-xre-190.jpg" alt="Motocicleta Honda XRE 190" loading="lazy">
           <span class="prod-tag">MOTO</span>
           <span class="prod-prazo">80 MESES</span>
         </div>
@@ -730,7 +749,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
       <div class="prod-card">
         <div class="prod-img">
-          <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Automóvel" loading="lazy">
+          <img src="/assets/catalogos/fiat-strada.jpg" alt="Automóvel Fiat Strada" loading="lazy">
           <span class="prod-tag">CARRO</span>
           <span class="prod-prazo">120 MESES</span>
         </div>
@@ -749,7 +768,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
       <div class="prod-card">
         <div class="prod-img">
-          <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Imóvel Residencial" loading="lazy">
+          <img src="/assets/catalogos/imovel-alto-padrao.webp" alt="Imóvel residencial de alto padrão" loading="lazy">
           <span class="prod-tag">IMÓVEL</span>
           <span class="prod-prazo">240 MESES</span>
         </div>
@@ -768,7 +787,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 
       <div class="prod-card">
         <div class="prod-img">
-          <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Veículos Pesados" loading="lazy">
+          <img src="/assets/catalogos/fh540-estrada.jpg" alt="Caminhão Volvo FH 540" loading="lazy">
           <span class="prod-tag">PESADOS</span>
           <span class="prod-prazo">120 MESES</span>
         </div>
@@ -936,7 +955,7 @@ src="https://www.facebook.com/tr?id=1429148099177272&ev=PageView&noscript=1"
 </footer>
 
 <!-- WHATSAPP FIXO MOBILE -->
-<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" rel="noopener noreferrer" aria-label="Falar com a GHR pelo WhatsApp"><svg viewBox="0 0 32 32" aria-hidden="true"><path d="M16.04 3A12.9 12.9 0 0 0 5.1 22.72L3.37 29l6.42-1.68A12.96 12.96 0 1 0 16.04 3Zm0 23.73a10.72 10.72 0 0 1-5.47-1.5l-.39-.23-3.8 1 1.02-3.7-.25-.38a10.77 10.77 0 1 1 8.89 4.81Zm5.9-8.06c-.32-.16-1.91-.94-2.2-1.05-.3-.11-.52-.16-.73.16-.22.32-.84 1.05-1.03 1.27-.19.21-.38.24-.7.08-.33-.16-1.37-.5-2.6-1.61a9.77 9.77 0 0 1-1.8-2.24c-.19-.32-.02-.5.14-.66.15-.14.33-.38.49-.57.16-.19.21-.32.32-.54.11-.21.06-.4-.02-.57-.08-.16-.73-1.75-1-2.4-.26-.63-.53-.54-.73-.55h-.62c-.22 0-.57.08-.87.4-.3.33-1.14 1.11-1.14 2.7 0 1.6 1.16 3.14 1.32 3.35.16.22 2.28 3.49 5.53 4.9.77.33 1.37.53 1.84.68.77.25 1.48.21 2.03.13.62-.1 1.92-.79 2.19-1.54.27-.75.27-1.4.19-1.54-.08-.13-.3-.21-.62-.38Z"/></svg></a>
 
 <script>
 // ============ DADOS REAIS DAS TABELAS CRED CAR ============
@@ -1165,19 +1184,21 @@ calcular();
   const CREDITO = 60000;
   const FIN_TAXA_MES = 0.018;   // 1,8% ao mês
   const FIN_PRAZO = 60;         // meses
-  const TAXA_ADM = 0.15;        // taxa de administração estimada
 
   // Financiamento pela tabela Price: parcela = PV * i / (1 - (1 + i)^-n)
   const parcelaFin = CREDITO * FIN_TAXA_MES / (1 - Math.pow(1 + FIN_TAXA_MES, -FIN_PRAZO));
   const totalFin = Math.round(parcelaFin * FIN_PRAZO);
-  const totalCP = Math.round(CREDITO * (1 + TAXA_ADM));
+
+  // Compra Programada: mesma linha da tabela CRED CAR usada pelo simulador (moto, plano A: 1 parcela alta + 79x)
+  const linhaCP = TABELAS.moto.dados.find(l => l[0] === CREDITO);
+  const totalCP = Math.round(linhaCP[1] + linhaCP[2] * 79);
 
   const brl = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', maximumFractionDigits: 0 });
 
   document.getElementById('graficoNota').textContent =
     `Simulação ilustrativa para crédito de ${brl(CREDITO)}. Financiamento: ${FIN_PRAZO}x de ${brl(parcelaFin)} ` +
-    `a ${(FIN_TAXA_MES * 100).toLocaleString('pt-BR')}% a.m. (tabela Price). Compra Programada: crédito + taxa de ` +
-    `administração estimada de ${TAXA_ADM * 100}%. Não inclui seguros, fundo de reserva ou reajustes.`;
+    `a ${(FIN_TAXA_MES * 100).toLocaleString('pt-BR')}% a.m. (tabela Price). Compra Programada: tabela CRED CAR de moto, ` +
+    `1 parcela de ${brl(linhaCP[1])} + 79x de ${brl(linhaCP[2])} (80 meses). Valores sujeitos a reajuste conforme contrato.`;
 
   const canvas = document.getElementById('graficoComparativo');
   if (!window.Chart || !canvas) return;
