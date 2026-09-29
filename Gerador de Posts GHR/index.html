@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gerador de Posts — GHR</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde: #33CC66;
+  --verde-escuro: #0B3D1A;
+  --menta: #E0F7E8;
+  --menta-clara: #F4F8F4;
+  --escuro: #1D2939;
+  --preto: #000000;
+  --branco: #FFFFFF;
+  --borda: #D5E5DC;
+  --muted: #5B6B63;
+  --mono: 'JetBrains Mono', Consolas, monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+  background: var(--menta-clara);
+  color: var(--escuro);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--menta-clara);
+  border-bottom: 1px solid var(--borda);
+  padding: 14px 24px;
+}
+.header-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.logo { font-weight: 900; font-size: 18px; letter-spacing: -0.5px; }
+.logo .d { color: var(--verde); }
+.logo small { font-weight: 500; color: var(--muted); font-size: 14px; margin-left: 6px; }
+header a {
+  font-size: 13px; font-weight: 700; color: var(--escuro);
+  text-decoration: none; border-bottom: 2px solid var(--verde);
+}
+
+.app {
+  max-width: 1320px; margin: 0 auto; padding: 24px;
+  display: grid; grid-template-columns: 380px 1fr; gap: 28px; align-items: start;
+}
+@media (max-width: 900px) {
+  .app { grid-template-columns: 1fr; padding: 16px; }
+}
+
+.painel {
+  background: var(--branco); border: 1px solid var(--borda);
+  padding: 20px; display: flex; flex-direction: column; gap: 18px;
+}
+.grupo { display: flex; flex-direction: column; gap: 6px; }
+.grupo > label, .rotulo {
+  font-family: var(--mono); font-size: 11px; font-weight: 700;
+  letter-spacing: 1px; text-transform: uppercase; color: var(--muted);
+}
+input[type=text], select, textarea {
+  width: 100%; font: inherit; font-size: 14px;
+  padding: 10px 12px; border: 1px solid var(--borda);
+  background: var(--menta-clara); color: var(--escuro);
+  border-radius: 0; outline: none;
+}
+input[type=text]:focus, select:focus, textarea:focus { border-color: var(--verde); }
+input[type=file] { font-size: 13px; }
+
+.chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.chips button, .seg button {
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+  padding: 10px 6px; border: 1px solid var(--borda);
+  background: var(--menta-clara); color: var(--escuro);
+  display: flex; flex-direction: column; align-items: center; gap: 2px;
+}
+.chips button span { font-size: 20px; line-height: 1; }
+.chips button.ativo, .seg button.ativo {
+  background: var(--verde-escuro); border-color: var(--verde-escuro); color: var(--branco);
+}
+
+.resumo {
+  background: var(--menta); border-left: 4px solid var(--verde);
+  padding: 12px 14px; font-size: 13px;
+}
+.resumo strong { font-size: 20px; font-weight: 900; display: block; color: var(--verde-escuro); }
+
+.linha { display: flex; gap: 8px; }
+.linha input { flex: 1; }
+
+.btn {
+  font: inherit; font-size: 13px; font-weight: 800; cursor: pointer;
+  padding: 10px 14px; border: 1px solid var(--escuro);
+  background: var(--branco); color: var(--escuro); white-space: nowrap;
+  transition: transform .1s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn.primario { background: var(--verde); border-color: var(--verde); color: var(--preto); }
+.btn.fantasma { border-color: var(--borda); color: var(--muted); font-weight: 600; }
+
+.palco { display: flex; flex-direction: column; gap: 16px; min-width: 0; }
+.acoes { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; }
+.moldura {
+  background: var(--escuro);
+  background-image: radial-gradient(rgba(255,255,255,.07) 1px, transparent 1px);
+  background-size: 18px 18px;
+  padding: 24px; display: flex; justify-content: center; align-items: center;
+}
+.moldura canvas {
+  display: block; max-width: 100%; max-height: 74vh;
+  width: auto; height: auto; box-shadow: 0 20px 50px rgba(0,0,0,.45);
+}
+.legenda-box { background: var(--branco); border: 1px solid var(--borda); padding: 16px; }
+.legenda-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+.legenda-box textarea { font-size: 13px; line-height: 1.55; resize: vertical; }
+.dica { font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="logo"><span class="d">◆</span> GHR <small>Gerador de Posts</small></div>
+    <a href="https://ghrcompraprogramada.netlify.app" target="_blank">Ver site →</a>
+  </div>
+</header>
+
+<main class="app">
+  <section class="painel">
+    <div class="grupo">
+      <span class="rotulo">Produto</span>
+      <div class="chips" id="mods">
+        <button data-mod="moto"><span>🏍️</span>Moto</button>
+        <button data-mod="carro"><span>🚗</span>Carro</button>
+        <button data-mod="imovel"><span>🏠</span>Imóvel</button>
+        <button data-mod="pesados"><span>🚛</span>Pesados</button>
+      </div>
+    </div>
+
+    <div class="grupo">
+      <label for="plano">Plano</label>
+      <select id="plano"></select>
+    </div>
+
+    <div class="grupo">
+      <label for="credito">Crédito (tabela CRED CAR)</label>
+      <select id="credito"></select>
+    </div>
+
+    <div class="resumo" id="resumo"></div>
+
+    <div class="grupo">
+      <label for="titulo">Título</label>
+      <input type="text" id="titulo">
+      <label for="destaque">Destaque em verde</label>
+      <div class="linha">
+        <input type="text" id="destaque">
+        <button class="btn" id="dado" title="Outro título">🎲</button>
+      </div>
+    </div>
+
+    <div class="grupo">
+      <label for="modelo">Modelo / legenda da foto (opcional)</label>
+      <input type="text" id="modelo">
+    </div>
+
+    <div class="grupo">
+      <label for="foto">Foto (opcional)</label>
+      <div class="linha">
+        <input type="file" id="foto" accept="image/*">
+        <button class="btn fantasma" id="tirarFoto">Remover</button>
+      </div>
+      <span class="dica">Sem foto, o post usa o ícone do produto.</span>
+    </div>
+
+    <div class="grupo">
+      <label for="beneficios">Benefícios (separe por vírgula)</label>
+      <input type="text" id="beneficios" value="Sem sorteio, Sem juros bancários, Data de entrega em contrato">
+    </div>
+
+    <div class="grupo">
+      <span class="rotulo">Formato</span>
+      <div class="seg" data-campo="formato">
+        <button data-v="feed">Feed 1:1</button>
+        <button data-v="retrato">Feed 4:5</button>
+        <button data-v="story">Story</button>
+      </div>
+    </div>
+
+    <div class="grupo">
+      <span class="rotulo">Tema</span>
+      <div class="seg" data-campo="tema">
+        <button data-v="escuro">Escuro</button>
+        <button data-v="claro">Claro</button>
+        <button data-v="verde">Verde</button>
+      </div>
+    </div>
+
+    <div class="grupo">
+      <label for="aviso">Aviso no rodapé</label>
+      <input type="text" id="aviso" value="Valores conforme tabela vigente, sujeitos a alteração. Consulte as condições do contrato.">
+    </div>
+  </section>
+
+  <section class="palco">
+    <div class="acoes">
+      <button class="btn" id="surpresa">✨ Surpreenda-me</button>
+      <button class="btn primario" id="baixar">Baixar PNG</button>
+    </div>
+    <div class="moldura"><canvas id="cv" width="1080" height="1350"></canvas></div>
+    <div class="legenda-box">
+      <div class="legenda-top">
+        <strong>Legenda pronta</strong>
+        <button class="btn" id="copiar">Copiar legenda</button>
+      </div>
+      <textarea id="legenda" rows="14" readonly></textarea>
+    </div>
+  </section>
+</main>
+
+<script>
+// ============ TABELAS CRED CAR (mesmos dados do simulador do site) ============
+const TABELAS = {
+  moto: {
+    dados: [
+      [20000,2750.00,350.00],[25000,3435.00,435.00],[30000,4125.00,525.00],
+      [35000,4812.00,612.00],[40000,5500.00,700.00],[45000,6188.00,788.00],
+      [50000,6875.00,875.00],[55000,7562.00,962.00],[60000,8250.00,1050.00],
+      [65000,8938.00,1138.00],[70000,9625.50,1225.50],[75000,10312.50,1312.50],
+      [80000,11000.00,1400.00],[85000,11688.00,1488.00],[90000,12375.00,1575.00],
+      [95000,13063.00,1663.00],[100000,13750.00,1750.00]
+    ]
+  },
+  carro: {
+    dados: [
+      [100000,1000.00,1296.29],[120000,1200.00,1555.55],[130000,1300.00,1685.18],
+      [140000,1400.00,1814.81],[150000,1500.00,1944.44],[160000,1600.00,2074.07],
+      [170000,1700.00,2203.70],[180000,1800.00,2333.33],[190000,1900.00,2462.96],
+      [200000,2000.00,2592.59]
+    ]
+  },
+  imovel: {
+    convencional: [
+      [200000,1500.00,1228.07],[220000,1650.00,1350.87],[230000,1725.00,1412.28],
+      [240000,1800.00,1473.68],[250000,1875.00,1535.08],[260000,1950.00,1596.49],
+      [270000,2025.00,1657.89],[280000,2100.00,1719.29],[290000,2175.00,1780.70],
+      [300000,2250.00,1842.10],[320000,2400.00,1964.91],[340000,2550.00,2087.71],
+      [350000,2625.00,2149.12],[360000,2700.00,2210.52],[370000,2775.00,2271.92],
+      [380000,2850.00,2333.33],[390000,2925.00,2394.73],[400000,3000.00,2456.14],
+      [500000,3750.00,3070.17]
+    ],
+    flex: [
+      [200000,1833.33,1228.07],[220000,2016.66,1350.87],[230000,2108.33,1412.28],
+      [240000,2200.00,1473.68],[250000,2291.66,1535.08],[260000,2383.33,1596.49],
+      [270000,2475.00,1657.89],[280000,2566.66,1719.29],[290000,2658.33,1780.70],
+      [300000,2750.00,1842.10],[320000,2933.33,1964.91],[340000,3116.66,2087.71],
+      [350000,3208.33,2149.12],[360000,3300.00,2210.52],[370000,3391.66,2271.92],
+      [380000,3483.33,2333.33],[390000,3575.00,2394.73],[400000,3666.66,2456.14],
+      [500000,4583.33,3070.17]
+    ],
+    b77: [
+      [220000,23191.66,1191.66],[240000,25300.00,1300.00],[260000,27408.33,1408.33],
+      [280000,29516.66,1516.66],[300000,31625.00,1625.00],[320000,33733.33,1733.33],
+      [340000,35841.66,1841.66],[360000,37950.00,1950.00],[380000,40058.33,2058.33],
+      [400000,42166.66,2166.66],[420000,44275.00,2275.00],[440000,46383.33,2383.33],
+      [460000,48491.66,2491.66],[480000,50600.00,2600.00],[500000,52708.33,2708.33]
+    ]
+  },
+  pesados: {
+    convencional: [
+      [220000,24383.33,2383.33],[240000,26600.00,2600.00],[260000,28816.66,2816.66],
+      [280000,31033.33,3033.33],[300000,33250.00,3250.00],[320000,35466.66,3466.66],
+      [340000,37683.33,3683.33],[360000,39900.00,3900.00],[380000,42116.66,4116.66],
+      [400000,44333.33,4333.33],[420000,46550.00,4550.00],[440000,48766.66,4766.66],
+      [460000,50983.33,4983.33],[480000,53200.00,5200.00],[500000,55416.66,5416.66]
+    ],
+    flex: [
+      [220000,2200.00,2607.40],[240000,2400.00,2844.44],[260000,2600.00,3081.48],
+      [280000,2800.00,3318.51],[300000,3000.00,3555.55],[320000,3200.00,3792.59],
+      [340000,3400.00,4029.62],[360000,3600.00,4266.66],[380000,3800.00,4503.70],
+      [400000,4000.00,4740.76],[420000,4200.00,4977.77],[440000,4400.00,5214.81],
+      [460000,4600.00,5451.85],[480000,4800.00,5688.88],[500000,5000.00,5925.92]
+    ]
+  }
+};
+
+// seg = [qtd de parcelas com valor da coluna 2, qtd com valor da coluna 3]
+const PLANOS = {
+  moto: {
+    A: { desc: "1 parcela alta + 79x", tab: "dados", seg: [1, 79] },
+    B: { desc: "2 parcelas altas + 78x", tab: "dados", seg: [2, 78] },
+    C: { desc: "3 parcelas altas + 77x", tab: "dados", seg: [3, 77] },
+    D: { desc: "4 parcelas altas + 76x", tab: "dados", seg: [4, 76] }
+  },
+  carro: {
+    MIX: { desc: "1º a 12º menor + 13º a 120º maior", tab: "dados", seg: [12, 108] }
+  },
+  imovel: {
+    CONV: { desc: "Convencional", tab: "convencional", seg: [12, 228] },
+    FLEX: { desc: "Flex (1º a 12º maior)", tab: "flex", seg: [12, 228] },
+    B77:  { desc: "B77 (1ª alta + 239x)", tab: "b77", seg: [1, 239] }
+  },
+  pesados: {
+    CONV: { desc: "Convencional (1ª alta + 119x)", tab: "convencional", seg: [1, 119] },
+    FLEX: { desc: "Flex (1º a 12º menor + 13º a 120º maior)", tab: "flex", seg: [12, 108] }
+  }
+};
+
+const PRODUTOS = {
+  moto: {
+    rotulo: "Moto", nome: "Moto", emoji: "🏍️", modelo: "Honda CG 160 Fan",
+    titulos: [["Sua moto com", "data certa."], ["Troque o ponto de ônibus", "pela sua moto."], ["Moto nova sem", "juros bancários."], ["Previsibilidade", "não é sorteio."]],
+    tags: ["#MotoNova", "#HondaCG", "#Motoboy"]
+  },
+  carro: {
+    rotulo: "Carro", nome: "Carro", emoji: "🚗", modelo: "VW Polo 2026",
+    titulos: [["Quer trocar de carro sem torcer", "todo mês?"], ["Um carro que", "caiba no seu mês."], ["Seu carro precisa de um plano,", "não de sorte."], ["Sua conquista com", "data certa."]],
+    tags: ["#CarroNovo", "#CarroZero", "#TrocaDeCarro"]
+  },
+  imovel: {
+    rotulo: "Imóvel", nome: "Imóvel", emoji: "🏠", modelo: "Sua casa própria",
+    titulos: [["A casa própria com", "data certa."], ["Troque o aluguel por", "um plano de verdade."], ["Seu imóvel precisa de um plano,", "não de sorte."], ["Previsibilidade", "não é sorteio."]],
+    tags: ["#CasaPropria", "#Imovel", "#SairDoAluguel"]
+  },
+  pesados: {
+    rotulo: "Pesados", nome: "Veículo pesado", emoji: "🚛", modelo: "Volvo FH 540",
+    titulos: [["Amplie sua frota", "sem travar o caixa."], ["Seu caminhão novo", "sem juros bancários."], ["Para quem", "move a economia."], ["Mais frete,", "com data certa."]],
+    tags: ["#Caminhao", "#Frota", "#Caminhoneiro", "#Transportadora"]
+  }
+};
+
+const WHATSAPP = "5531971746067";
+const WHATS_FMT = "(31) 97174-6067";
+const SITE = "ghrcompraprogramada.netlify.app";
+
+const SANS = "Inter, 'Segoe UI', Arial, sans-serif";
+const MONO = "'JetBrains Mono', Consolas, monospace";
+const EMOJI = "'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif";
+
+const FORMATOS = {
+  feed:    { w: 1080, h: 1080, pad: 72, lado: true,  fs: 76,  linhas: 3, s: 1,    gapTopo: 44 },
+  retrato: { w: 1080, h: 1350, pad: 76, lado: true,  fs: 86,  linhas: 3, s: 1.05, gapTopo: 64 },
+  story:   { w: 1080, h: 1920, pad: 84, lado: false, fs: 104, linhas: 4, s: 1.3,  gapTopo: 90 }
+};
+
+const TEMAS = {
+  escuro: { bg1: "#0F4D23", bg2: "#05200D", txt: "#FFFFFF", sub: "rgba(255,255,255,.72)", hl: "#33CC66", preco: "#33CC66",
+            caixa: "rgba(255,255,255,.07)", grade: "rgba(255,255,255,.045)", borda: "rgba(51,204,102,.6)", ctaBg: "#33CC66", ctaTxt: "#000000", canto: "#33CC66", brilho: "rgba(51,204,102,.22)" },
+  claro:  { bg1: "#FFFFFF", bg2: "#DDF5E5", txt: "#1D2939", sub: "#4A5A52", hl: "#22A652", preco: "#0B3D1A",
+            caixa: "#FFFFFF", grade: "rgba(11,61,26,.06)", borda: "#33CC66", ctaBg: "#33CC66", ctaTxt: "#000000", canto: "#33CC66", brilho: "rgba(51,204,102,.18)" },
+  verde:  { bg1: "#3DD672", bg2: "#23A94F", txt: "#000000", sub: "rgba(0,0,0,.7)", hl: "#FFFFFF", preco: "#000000",
+            caixa: "rgba(0,0,0,.09)", grade: "rgba(0,0,0,.06)", borda: "rgba(0,0,0,.5)", ctaBg: "#000000", ctaTxt: "#33CC66", canto: "#000000", brilho: "rgba(255,255,255,.25)" }
+};
+
+const st = {
+  mod: "moto", plano: "A", credito: 20000,
+  formato: "retrato", tema: "escuro",
+  tituloIdx: 0, foto: null, fotoUrl: null
+};
+
+const $ = id => document.getElementById(id);
+const cv = $("cv"), ctx = cv.getContext("2d");
+const fmt = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", minimumFractionDigits: 2 });
+const fmtInt = v => v.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+
+// ============ CÁLCULO ============
+function tabelaAtual() {
+  return TABELAS[st.mod][PLANOS[st.mod][st.plano].tab];
+}
+
+function calcular() {
+  const plano = PLANOS[st.mod][st.plano];
+  const linha = tabelaAtual().find(l => l[0] === st.credito) || tabelaAtual()[0];
+  const segs = [{ n: plano.seg[0], v: linha[1] }, { n: plano.seg[1], v: linha[2] }];
+  const prazo = segs[0].n + segs[1].n;
+  // "a partir de" só considera as parcelas que se repetem (12x ou mais)
+  const aPartir = Math.min(...segs.filter(s => s.n >= 12).map(s => s.v));
+  const detalhe = segs.map(s => `${s.n}x ${fmt(s.v)}`).join(" + ");
+  return { credito: linha[0], aPartir, detalhe, prazo };
+}
+
+// ============ FORMULÁRIO ============
+function popularPlanos() {
+  const sel = $("plano");
+  sel.innerHTML = "";
+  for (const [k, p] of Object.entries(PLANOS[st.mod])) {
+    sel.add(new Option(p.desc, k));
+  }
+  st.plano = Object.keys(PLANOS[st.mod])[0];
+  sel.value = st.plano;
+}
+
+function popularCreditos() {
+  const sel = $("credito");
+  const atual = st.credito;
+  sel.innerHTML = "";
+  for (const l of tabelaAtual()) sel.add(new Option(fmtInt(l[0]), l[0]));
+  const existe = tabelaAtual().some(l => l[0] === atual);
+  st.credito = existe ? atual : tabelaAtual()[0][0];
+  sel.value = st.credito;
+}
+
+function aplicarTitulo() {
+  const t = PRODUTOS[st.mod].titulos[st.tituloIdx % PRODUTOS[st.mod].titulos.length];
+  $("titulo").value = t[0];
+  $("destaque").value = t[1];
+}
+
+function trocarProduto(mod) {
+  const antigoModelo = PRODUTOS[st.mod].modelo;
+  st.mod = mod;
+  st.tituloIdx = 0;
+  document.querySelectorAll("#mods button").forEach(b => b.classList.toggle("ativo", b.dataset.mod === mod));
+  if (!$("modelo").value || $("modelo").value === antigoModelo) $("modelo").value = PRODUTOS[mod].modelo;
+  popularPlanos();
+  popularCreditos();
+  aplicarTitulo();
+  atualizar();
+}
+
+function marcarSeg(campo) {
+  document.querySelectorAll(`.seg[data-campo="${campo}"] button`)
+    .forEach(b => b.classList.toggle("ativo", b.dataset.v === st[campo]));
+}
+
+// ============ DESENHO ============
+function fonte(peso, tam, fam = SANS) { ctx.font = `${peso} ${tam}px ${fam}`; }
+
+function caber(texto, peso, tam, maxW, fam = SANS, min = 12) {
+  fonte(peso, tam, fam);
+  while (ctx.measureText(texto).width > maxW && tam > min) { tam -= 1; fonte(peso, tam, fam); }
+  return tam;
+}
+
+// Quebra o título em linhas, mantendo a cor de cada palavra (normal ou destaque).
+// Se couber, o destaque começa numa linha própria, como nos títulos do site.
+function quebrarTitulo(principal, destaque, maxW, maxLinhas) {
+  const separado = [...quebrarPalavras(principal, false, maxW), ...quebrarPalavras(destaque, true, maxW)];
+  if (separado.length <= maxLinhas) return separado;
+  return quebrarPalavras(principal, false, maxW, destaque);
+}
+
+function quebrarPalavras(texto, hl, maxW, destaque = "") {
+  const palavras = [
+    ...texto.trim().split(/\s+/).filter(Boolean).map(t => ({ t, hl })),
+    ...destaque.trim().split(/\s+/).filter(Boolean).map(t => ({ t, hl: true }))
+  ];
+  const espaco = ctx.measureText(" ").width;
+  const linhas = [];
+  let linha = [], larg = 0;
+  for (const p of palavras) {
+    const w = ctx.measureText(p.t).width;
+    const extra = linha.length ? espaco + w : w;
+    if (linha.length && larg + extra > maxW) {
+      linhas.push(linha); linha = [p]; larg = w;
+    } else {
+      linha.push(p); larg += extra;
+    }
+  }
+  if (linha.length) linhas.push(linha);
+  return linhas;
+}
+
+function cantos(x, y, w, h, cor, tam, esp) {
+  ctx.strokeStyle = cor; ctx.lineWidth = esp; ctx.lineCap = "square";
+  const o = esp * 2;
+  const L = (x1, y1, x2, y2, x3, y3) => { ctx.beginPath(); ctx.moveTo(x1, y1); ctx.lineTo(x2, y2); ctx.lineTo(x3, y3); ctx.stroke(); };
+  L(x - o, y - o + tam, x - o, y - o, x - o + tam, y - o);
+  L(x + w + o - tam, y - o, x + w + o, y - o, x + w + o, y - o + tam);
+  L(x - o, y + h + o - tam, x - o, y + h + o, x - o + tam, y + h + o);
+  L(x + w + o - tam, y + h + o, x + w + o, y + h + o, x + w + o, y + h + o - tam);
+}
+
+function desenharVisual(x, y, w, h, T, F) {
+  const P = PRODUTOS[st.mod];
+  const modelo = $("modelo").value.trim();
+  ctx.fillStyle = T.caixa;
+  ctx.fillRect(x, y, w, h);
+
+  if (st.foto) {
+    const img = st.foto;
+    const esc = Math.max(w / img.width, h / img.height);
+    const iw = img.width * esc, ih = img.height * esc;
+    ctx.save();
+    ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
+    ctx.drawImage(img, x + (w - iw) / 2, y + (h - ih) / 2, iw, ih);
+    if (modelo) {
+      const g = ctx.createLinearGradient(0, y + h * 0.55, 0, y + h);
+      g.addColorStop(0, "rgba(0,0,0,0)"); g.addColorStop(1, "rgba(0,0,0,.78)");
+      ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+      const tam = caber(modelo, 800, 30 * F.s, w - 48);
+      ctx.fillStyle = "#FFFFFF"; ctx.textAlign = "left"; ctx.textBaseline = "alphabetic";
+      ctx.fillText(modelo, x + 24, y + h - 24);
+    }
+    ctx.restore();
+  } else {
+    // brilho atrás do ícone
+    const r = Math.min(w, h) * 0.55;
+    const g = ctx.createRadialGradient(x + w / 2, y + h / 2, 0, x + w / 2, y + h / 2, r);
+    g.addColorStop(0, T.brilho); g.addColorStop(1, "rgba(0,0,0,0)");
+    ctx.fillStyle = g; ctx.fillRect(x, y, w, h);
+
+    const tamEmoji = Math.min(w, h) * (modelo ? 0.42 : 0.5);
+    ctx.textAlign = "center"; ctx.textBaseline = "middle";
+    ctx.font = `${tamEmoji}px ${EMOJI}`;
+    ctx.fillText(P.emoji, x + w / 2, y + h / 2 - (modelo ? h * 0.08 : 0));
+    if (modelo) {
+      caber(modelo, 800, 28 * F.s, w - 40);
+      ctx.fillStyle = T.txt;
+      ctx.fillText(modelo, x + w / 2, y + h - Math.max(34, h * 0.11));
+    }
+  }
+  cantos(x, y, w, h, T.canto, Math.max(28, Math.min(w, h) * 0.12), 5);
+}
+
+// Bloco de preço; se "desenhar" for false, só mede a altura
+function blocoPreco(x, y, maxW, T, F, c, desenhar = true) {
+  const s = F.s;
+  let cy = y;
+  ctx.textAlign = "left"; ctx.textBaseline = "top";
+
+  const lbl = (txt) => {
+    fonte(700, 22 * s, MONO);
+    if (desenhar) { ctx.fillStyle = T.sub; ctx.fillText(txt, x, cy); }
+    cy += 22 * s + 10;
+  };
+
+  lbl("CRÉDITO DE");
+  const tCred = caber(fmtInt(c.credito), 800, 58 * s, maxW);
+  if (desenhar) { ctx.fillStyle = T.txt; ctx.fillText(fmtInt(c.credito), x, cy); }
+  cy += tCred + 24 * s;
+
+  lbl("PARCELAS A PARTIR DE");
+  const valor = fmt(c.aPartir);
+  fonte(700, 32 * s); const wMes = ctx.measureText("/mês").width + 8;
+  const tVal = caber(valor, 900, 88 * s, maxW - wMes);
+  if (desenhar) {
+    ctx.fillStyle = T.preco; ctx.fillText(valor, x, cy);
+    const wv = ctx.measureText(valor).width;
+    fonte(700, 32 * s); ctx.fillStyle = T.sub; ctx.textBaseline = "alphabetic";
+    ctx.fillText("/mês", x + wv + 8, cy + tVal * 0.86);
+    ctx.textBaseline = "top";
+  }
+  cy += tVal + 16;
+
+  const det = `${c.detalhe} · ${c.prazo} meses`;
+  const tDet = caber(det, 500, 23 * s, maxW);
+  if (desenhar) { ctx.fillStyle = T.sub; ctx.fillText(det, x, cy); }
+  cy += tDet * 1.2;
+
+  return cy - y;
+}
+
+function desenhar() {
+  const F = FORMATOS[st.formato], T = TEMAS[st.tema];
+  const W = F.w, H = F.h, P = F.pad, CW = W - 2 * P;
+  const c = calcular();
+  if (cv.width !== W || cv.height !== H) { cv.width = W; cv.height = H; }
+
+  // Fundo
+  const g = ctx.createLinearGradient(0, 0, W * 0.5, H);
+  g.addColorStop(0, T.bg1); g.addColorStop(1, T.bg2);
+  ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
+  ctx.strokeStyle = T.grade; ctx.lineWidth = 2;
+  for (let gx = 60; gx < W; gx += 60) { ctx.beginPath(); ctx.moveTo(gx, 0); ctx.lineTo(gx, H); ctx.stroke(); }
+  for (let gy = 60; gy < H; gy += 60) { ctx.beginPath(); ctx.moveTo(0, gy); ctx.lineTo(W, gy); ctx.stroke(); }
+
+  // Topo: logo + etiqueta do produto
+  let y = P;
+  ctx.textBaseline = "middle"; ctx.textAlign = "left";
+  const meio = y + 24;
+  fonte(900, 30); ctx.fillStyle = T.hl; ctx.fillText("◆", P, meio);
+  let lx = P + ctx.measureText("◆").width + 12;
+  fonte(900, 38); ctx.fillStyle = T.txt; ctx.fillText("GHR", lx, meio);
+  lx += ctx.measureText("GHR").width + 12;
+  fonte(500, 26); ctx.fillStyle = T.sub; ctx.fillText("Compra Programada", lx, meio);
+
+  const etq = PRODUTOS[st.mod].rotulo.toUpperCase();
+  fonte(700, 22, MONO);
+  const ew = ctx.measureText(etq).width + 32;
+  ctx.strokeStyle = T.borda; ctx.lineWidth = 2;
+  ctx.strokeRect(W - P - ew, meio - 22, ew, 44);
+  ctx.fillStyle = T.txt; ctx.textAlign = "center";
+  ctx.fillText(etq, W - P - ew / 2, meio + 1);
+
+  y += 48 + F.gapTopo;
+
+  // Título
+  const principal = $("titulo").value, destaque = $("destaque").value;
+  let fs = F.fs, linhas;
+  do {
+    fonte(900, fs);
+    linhas = quebrarTitulo(principal, destaque, CW, F.linhas);
+    if (linhas.length <= F.linhas) break;
+    fs -= 3;
+  } while (fs > 36);
+  const lh = fs * 1.06;
+  ctx.textAlign = "left"; ctx.textBaseline = "top";
+  const espaco = ctx.measureText(" ").width;
+  for (const linha of linhas) {
+    let x = P;
+    for (const p of linha) {
+      ctx.fillStyle = p.hl ? T.hl : T.txt;
+      ctx.fillText(p.t, x, y);
+      x += ctx.measureText(p.t).width + espaco;
+    }
+    y += lh;
+  }
+  y += F.lado ? 40 : 56;
+
+  // Rodapé (de baixo pra cima)
+  const tRod = 19;
+  const yRod = H - P - tRod;
+  const ctaH = H > 1100 ? 116 : 104;
+  const ctaY = yRod - 26 - ctaH;
+  const chipsH = Math.round(56 * Math.min(F.s, 1.15));
+  const chipsY = ctaY - 28 - chipsH;
+  const meioFim = chipsY - 40;
+  const mh = meioFim - y;
+
+  // Meio: visual + preço
+  if (F.lado) {
+    const boxS = Math.max(160, Math.min(mh, CW * 0.42));
+    const precoW = CW - boxS - 44;
+    desenharVisual(W - P - boxS, y + (mh - boxS) / 2, boxS, boxS, T, F);
+    const ph = blocoPreco(P, 0, precoW, T, F, c, false);
+    blocoPreco(P, y + Math.max(0, (mh - ph) / 2), precoW, T, F, c);
+  } else {
+    const ph = blocoPreco(P, 0, CW, T, F, c, false);
+    const boxH = Math.max(200, mh - ph - 48);
+    desenharVisual(P, y, CW, boxH, T, F);
+    blocoPreco(P, y + boxH + 48, CW, T, F, c);
+  }
+
+  // Benefícios
+  const itens = $("beneficios").value.split(",").map(s => s.trim()).filter(Boolean).slice(0, 4).map(s => "✓ " + s);
+  if (itens.length) {
+    let tc = Math.round(22 * Math.min(F.s, 1.15)), larguras, total;
+    const gap = 12;
+    do {
+      fonte(700, tc, MONO);
+      larguras = itens.map(t => ctx.measureText(t).width + 32);
+      total = larguras.reduce((a, b) => a + b, 0) + gap * (itens.length - 1);
+      if (total <= CW) break;
+      tc -= 1;
+    } while (tc > 13);
+    let cx = P;
+    ctx.textBaseline = "middle"; ctx.textAlign = "left";
+    ctx.strokeStyle = T.borda; ctx.lineWidth = 2;
+    itens.forEach((t, i) => {
+      ctx.strokeRect(cx, chipsY, larguras[i], chipsH);
+      ctx.fillStyle = T.txt;
+      ctx.fillText(t, cx + 16, chipsY + chipsH / 2 + 1);
+      cx += larguras[i] + gap;
+    });
+  }
+
+  // CTA
+  ctx.fillStyle = T.ctaBg; ctx.fillRect(P, ctaY, CW, ctaH);
+  ctx.fillStyle = T.ctaTxt; ctx.textBaseline = "middle";
+  fonte(700, 30, MONO);
+  const wTel = ctx.measureText(WHATS_FMT).width;
+  ctx.textAlign = "right"; ctx.fillText(WHATS_FMT, W - P - 32, ctaY + ctaH / 2 + 1);
+  caber("Simule agora no WhatsApp →", 900, 38, CW - wTel - 96);
+  ctx.textAlign = "left"; ctx.fillText("Simule agora no WhatsApp →", P + 32, ctaY + ctaH / 2 + 1);
+
+  // Linha final: aviso + site
+  ctx.textBaseline = "top";
+  fonte(700, tRod, MONO);
+  const wSite = ctx.measureText(SITE).width;
+  ctx.fillStyle = T.sub; ctx.textAlign = "right";
+  ctx.fillText(SITE, W - P, yRod);
+  let aviso = $("aviso").value.trim();
+  if (aviso) {
+    const maxAviso = CW - wSite - 32;
+    const ta = caber(aviso, 500, tRod, maxAviso, SANS, 14);
+    while (ctx.measureText(aviso).width > maxAviso && aviso.length > 4) aviso = aviso.slice(0, -2).trimEnd() + "…";
+    ctx.textAlign = "left";
+    ctx.fillText(aviso, P, yRod + (tRod - ta) / 2);
+  }
+}
+
+// ============ LEGENDA ============
+function montarLegenda() {
+  const P = PRODUTOS[st.mod], c = calcular();
+  const modelo = $("modelo").value.trim();
+  const titulo = `${$("titulo").value.trim()} ${$("destaque").value.trim()}`.trim();
+  const beneficios = $("beneficios").value.split(",").map(s => s.trim()).filter(Boolean);
+  const msg = encodeURIComponent(`Olá! Vi o post da GHR sobre ${P.nome.toLowerCase()} com crédito de ${fmtInt(c.credito)} e quero simular.`);
+  const tags = ["#CompraProgramada", "#GHR", "#CredCar", "#SeteLagoas", "#ConquistaComDataCerta", ...P.tags];
+
+  return [
+    titulo,
+    "",
+    `${P.emoji} ${P.nome}${modelo ? " — " + modelo : ""}`,
+    `💰 Crédito de ${fmtInt(c.credito)}`,
+    `📅 Parcelas a partir de ${fmt(c.aPartir)}/mês`,
+    `🧾 Plano: ${c.detalhe} (${c.prazo} meses)`,
+    "",
+    ...beneficios.map(b => `✅ ${b}`),
+    "",
+    `📲 Simule agora no WhatsApp: https://wa.me/${WHATSAPP}?text=${msg}`,
+    `🌐 ${SITE}`,
+    "",
+    $("aviso").value.trim(),
+    "",
+    tags.join(" ")
+  ].join("\n").replace(/\n{3,}/g, "\n\n");
+}
+
+function atualizar() {
+  const c = calcular();
+  $("resumo").innerHTML =
+    `Parcelas a partir de <strong>${fmt(c.aPartir)}/mês</strong>${c.detalhe} · ${c.prazo} meses`;
+  $("legenda").value = montarLegenda();
+  desenhar();
+}
+
+// ============ EVENTOS ============
+document.querySelectorAll("#mods button").forEach(b => b.addEventListener("click", () => trocarProduto(b.dataset.mod)));
+
+$("plano").addEventListener("change", e => { st.plano = e.target.value; popularCreditos(); atualizar(); });
+$("credito").addEventListener("change", e => { st.credito = +e.target.value; atualizar(); });
+
+["titulo", "destaque", "modelo", "beneficios", "aviso"].forEach(id => $(id).addEventListener("input", atualizar));
+
+document.querySelectorAll(".seg").forEach(seg => {
+  const campo = seg.dataset.campo;
+  seg.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    st[campo] = b.dataset.v; marcarSeg(campo); atualizar();
+  }));
+});
+
+$("dado").addEventListener("click", () => { st.tituloIdx++; aplicarTitulo(); atualizar(); });
+
+$("foto").addEventListener("change", e => {
+  const arq = e.target.files[0];
+  if (!arq) return;
+  if (st.fotoUrl) URL.revokeObjectURL(st.fotoUrl);
+  st.fotoUrl = URL.createObjectURL(arq);
+  const img = new Image();
+  img.onload = () => { st.foto = img; atualizar(); };
+  img.src = st.fotoUrl;
+});
+$("tirarFoto").addEventListener("click", () => {
+  st.foto = null; $("foto").value = "";
+  if (st.fotoUrl) { URL.revokeObjectURL(st.fotoUrl); st.fotoUrl = null; }
+  atualizar();
+});
+
+$("surpresa").addEventListener("click", () => {
+  const sortear = arr => arr[Math.floor(Math.random() * arr.length)];
+  st.tema = sortear(Object.keys(TEMAS).filter(t => t !== st.tema));
+  st.tituloIdx = Math.floor(Math.random() * PRODUTOS[st.mod].titulos.length);
+  st.credito = sortear(tabelaAtual())[0];
+  $("credito").value = st.credito;
+  marcarSeg("tema"); aplicarTitulo(); atualizar();
+});
+
+$("baixar").addEventListener("click", () => {
+  desenhar();
+  cv.toBlob(blob => {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = `ghr-${st.mod}-${st.credito}-${st.formato}-${st.tema}.png`;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+  }, "image/png");
+});
+
+$("copiar").addEventListener("click", async () => {
+  const btn = $("copiar"), txt = $("legenda").value;
+  try { await navigator.clipboard.writeText(txt); }
+  catch { $("legenda").select(); document.execCommand("copy"); }
+  btn.textContent = "Copiado ✓";
+  setTimeout(() => (btn.textContent = "Copiar legenda"), 1600);
+});
+
+// ============ INÍCIO ============
+marcarSeg("formato"); marcarSeg("tema");
+trocarProduto("moto");
+Promise.all([
+  "900 40px Inter", "800 40px Inter", "700 40px Inter", "500 40px Inter",
+  "700 20px 'JetBrains Mono'"
+].map(f => document.fonts.load(f))).catch(() => {}).then(desenhar);
+</script>
+</body>
+</html>

@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHR Compra Programada — Sua conquista com data certa</title>
+<meta name="description" content="Compra Programada de moto, carro, imóvel e veículos pesados com data de entrega definida em contrato. Sem sorteio, sem juros bancários. Atendimento local em Sete Lagoas/MG.">
+<meta property="og:title" content="GHR Compra Programada — Sua conquista com data certa">
+<meta property="og:description" content="Sem sorteio, sem juros bancários. Data de entrega definida em contrato.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ghrcompraprogramada.netlify.app">
+
+<!-- ✅ Cole aqui o Pixel da Meta quando criar a campanha
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'SEU_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+-->
+
+<style>
+:root {
+  --verde: #33CC66;
+  --verde-escuro: #0B3D1A;
+  --menta: #E0F7E8;
+  --menta-clara: #F4F8F4;
+  --escuro: #1D2939;
+  --preto: #000000;
+  --branco: #FFFFFF;
+  --prata: #C0C0C0;
+  --borda: #D5E5DC;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  background: var(--menta-clara);
+  color: var(--escuro);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* HEADER */
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--menta-clara);
+  border-bottom: 1px solid var(--borda);
+  padding: 14px 24px;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 900; font-size: 18px; letter-spacing: -0.5px;
+  text-decoration: none; color: var(--escuro); flex-shrink: 0;
+}
+.logo-diamond { color: var(--verde); font-size: 16px; }
+.logo strong { font-size: 20px; }
+nav { display: flex; gap: 24px; align-items: center; }
+nav a {
+  color: var(--escuro); text-decoration: none;
+  font-size: 14px; font-weight: 500;
+}
+nav a:hover { color: var(--verde); }
+.cta-header {
+  background: var(--verde); color: var(--preto);
+  padding: 12px 20px; font-weight: 800; font-size: 13px;
+  text-decoration: none; white-space: nowrap;
+  transition: all 0.15s; flex-shrink: 0;
+}
+.cta-header:hover { background: #2AB857; }
+
+/* HERO */
+.hero {
+  max-width: 1200px; margin: 0 auto;
+  padding: 60px 24px 80px;
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 60px; align-items: center;
+}
+.hero-tag {
+  font-family: var(--mono); font-size: 12px; color: var(--verde);
+  letter-spacing: 2px; margin-bottom: 16px;
+}
+.hero h1 {
+  font-size: 64px; font-weight: 900; line-height: 1.05;
+  letter-spacing: -2px; margin-bottom: 24px;
+}
+.hero h1 span { color: var(--verde); }
+.hero p {
+  font-size: 18px; color: #5A6B7A; margin-bottom: 32px; max-width: 560px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  padding: 16px 28px; font-weight: 800; font-size: 14px;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: all 0.15s; display: inline-block;
+}
+.btn-primary { background: var(--verde); color: var(--preto); }
+.btn-primary:hover { background: #2AB857; }
+.btn-secondary {
+  background: transparent; color: var(--escuro);
+  border: 2px solid var(--escuro);
+}
+.btn-secondary:hover { background: var(--escuro); color: var(--branco); }
+.hero-visual {
+  position: relative; aspect-ratio: 1;
+  background: linear-gradient(135deg, var(--verde-escuro) 0%, var(--preto) 100%);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.hero-visual::before, .hero-visual::after {
+  content: ''; position: absolute;
+  width: 40px; height: 40px;
+  border: 3px solid var(--verde);
+}
+.hero-visual::before { top: 20px; left: 20px; border-right: 0; border-bottom: 0; }
+.hero-visual::after { bottom: 20px; right: 20px; border-left: 0; border-top: 0; }
+.hero-visual img {
+  max-width: 85%; max-height: 85%; object-fit: contain;
+}
+.hero-visual .emoji-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+  font-size: 64px; opacity: 0.9;
+}
+
+/* STATS */
+.stats {
+  max-width: 1200px; margin: 0 auto 80px; padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--borda); border-bottom: 1px solid var(--borda);
+}
+.stat {
+  padding: 36px 24px; border-right: 1px solid var(--borda); text-align: center;
+}
+.stat:last-child { border-right: 0; }
+.stat-num {
+  font-size: 40px; font-weight: 900; color: var(--verde);
+  line-height: 1; margin-bottom: 8px; letter-spacing: -1px;
+}
+.stat-label { font-size: 13px; color: #5A6B7A; }
+
+/* SECTION BASE */
+section { padding: 80px 24px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  font-family: var(--mono); font-size: 12px; color: var(--verde);
+  letter-spacing: 2px; margin-bottom: 12px;
+}
+h2 {
+  font-size: 44px; font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 16px;
+}
+h2 span { color: var(--verde); }
+.section-sub { font-size: 17px; color: #5A6B7A; max-width: 640px; margin-bottom: 48px; }
+
+/* COMO FUNCIONA */
+.funciona-dark { background: var(--preto); color: var(--branco); }
+.funciona-dark h2 { color: var(--branco); }
+.funciona-dark .section-sub { color: #A0A8B0; }
+.funciona-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+  margin-top: 40px;
+}
+.funciona-card {
+  border: 1px solid #2A3540; padding: 32px;
+  background: rgba(255,255,255,0.02);
+}
+.funciona-card.highlight {
+  border-color: var(--verde);
+  background: rgba(51, 204, 102, 0.08);
+}
+.funciona-badge {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px;
+  padding: 4px 10px; border: 1px solid var(--verde); color: var(--verde);
+  display: inline-block; margin-bottom: 16px;
+}
+.funciona-card h3 {
+  font-size: 22px; margin-bottom: 12px; font-weight: 800;
+}
+.funciona-card p { color: #A0A8B0; font-size: 15px; }
+.funciona-card.highlight p { color: #C0D0C8; }
+.funciona-nota {
+  margin-top: 32px; padding: 20px 24px;
+  border-left: 3px solid var(--verde);
+  background: rgba(51, 204, 102, 0.06);
+  font-size: 15px; color: #C0D0C8;
+}
+
+/* CALCULADORA */
+.calc-section { background: var(--menta); }
+.calc-wrap {
+  max-width: 800px; margin: 0 auto;
+  background: var(--branco); padding: 48px 40px;
+  position: relative;
+}
+.calc-wrap::before, .calc-wrap::after {
+  content: ''; position: absolute; width: 24px; height: 24px;
+  border: 3px solid var(--verde);
+}
+.calc-wrap::before { top: -3px; left: -3px; border-right: 0; border-bottom: 0; }
+.calc-wrap::after { bottom: -3px; right: -3px; border-left: 0; border-top: 0; }
+.calc-wrap h2 { font-size: 36px; margin-bottom: 8px; }
+.calc-wrap .section-sub { margin-bottom: 32px; font-size: 15px; }
+
+.mod-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;
+  margin-bottom: 28px;
+}
+.mod-btn {
+  padding: 16px 8px; background: var(--branco);
+  border: 1px solid var(--borda); cursor: pointer;
+  text-align: center; font-size: 13px; font-weight: 700;
+  color: var(--escuro); font-family: inherit; transition: all 0.15s;
+}
+.mod-btn:hover { border-color: var(--verde); }
+.mod-btn.active { background: var(--escuro); color: var(--branco); border-color: var(--escuro); }
+.mod-btn .emoji { display: block; font-size: 22px; margin-bottom: 6px; }
+
+.field { margin-bottom: 24px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--verde); margin-bottom: 8px;
+  font-family: var(--mono);
+}
+.field input[type="number"], .field select {
+  width: 100%; padding: 14px 16px;
+  border: 1px solid var(--borda); font-size: 16px;
+  font-family: inherit; background: var(--branco); color: var(--escuro);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--verde); }
+.field input[type="range"] {
+  width: 100%; accent-color: var(--verde); margin-top: 12px;
+}
+.range-val {
+  display: flex; justify-content: space-between;
+  font-size: 11px; color: #5A6B7A; margin-top: 4px;
+  font-family: var(--mono);
+}
+
+.result {
+  background: var(--escuro); color: var(--branco);
+  padding: 28px 24px; margin-top: 8px;
+  position: relative;
+}
+.result-tag {
+  font-family: var(--mono); font-size: 11px; color: var(--verde);
+  letter-spacing: 1.5px; margin-bottom: 16px;
+}
+.result-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.result-row:last-child { border-bottom: 0; }
+.result-label { font-size: 13px; opacity: 0.7; }
+.result-value { font-size: 20px; font-weight: 800; }
+.result-value.big { font-size: 32px; color: var(--verde); }
+
+.calc-cta {
+  display: block; width: 100%; padding: 18px;
+  background: var(--verde); color: var(--preto);
+  text-align: center; text-decoration: none;
+  font-weight: 800; font-size: 16px; letter-spacing: 0.5px;
+  margin-top: 20px; font-family: inherit; transition: all 0.15s;
+}
+.calc-cta:hover { background: #2AB857; }
+.calc-disclaimer {
+  font-size: 11px; color: #5A6B7A; margin-top: 20px; line-height: 1.6;
+}
+
+/* PRODUTOS */
+.prod-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.prod-card {
+  background: var(--branco); border: 1px solid var(--borda);
+  overflow: hidden; transition: all 0.2s;
+  display: flex; flex-direction: column;
+}
+.prod-card:hover {
+  border-color: var(--verde);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(11, 61, 26, 0.08);
+}
+.prod-img {
+  aspect-ratio: 16/10; background: var(--menta);
+  overflow: hidden; position: relative;
+}
+.prod-img img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.prod-body { padding: 24px 22px 26px; flex: 1; display: flex; flex-direction: column; }
+.prod-body h3 {
+  font-size: 20px; font-weight: 800; margin-bottom: 6px;
+}
+.prod-price {
+  color: var(--verde); font-weight: 800; font-size: 13px;
+  margin-bottom: 14px; font-family: var(--mono);
+}
+.prod-body p {
+  font-size: 14px; color: #5A6B7A; margin-bottom: 20px;
+  flex: 1;
+}
+.prod-link {
+  color: var(--escuro); font-weight: 800; font-size: 14px;
+  text-decoration: none; border-bottom: 2px solid var(--verde);
+  padding-bottom: 2px; align-self: flex-start;
+}
+.prod-link:hover { color: var(--verde); }
+
+/* POR QUE A GHR */
+.ghr-dark { background: var(--preto); color: var(--branco); }
+.ghr-dark h2 { color: var(--branco); }
+.ghr-dark .section-sub { color: #A0A8B0; }
+.ghr-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px;
+  margin-top: 40px;
+}
+.ghr-item { display: flex; gap: 16px; }
+.ghr-check {
+  width: 28px; height: 28px; flex-shrink: 0;
+  background: transparent; border: 2px solid var(--verde);
+  color: var(--verde); display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px;
+}
+.ghr-item h4 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+.ghr-item p { font-size: 14px; color: #A0A8B0; }
+
+/* DOCS */
+.docs-list {
+  border-top: 1px solid var(--borda);
+}
+.doc-row {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 0; border-bottom: 1px solid var(--borda);
+  font-size: 15px;
+}
+.doc-check {
+  width: 24px; height: 24px; flex-shrink: 0;
+  border: 2px solid var(--verde); color: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 13px;
+}
+.docs-nota {
+  margin-top: 24px; font-size: 14px; color: #5A6B7A;
+}
+.docs-nota a { color: var(--verde); font-weight: 700; }
+
+/* FAQ */
+.faq-list { max-width: 840px; }
+.faq-item {
+  border-bottom: 1px solid var(--borda); padding: 0;
+}
+.faq-q {
+  padding: 22px 0; font-size: 17px; font-weight: 700;
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; user-select: none;
+}
+.faq-q::after {
+  content: '+'; font-size: 24px; color: var(--verde);
+  font-weight: 400; transition: transform 0.2s;
+}
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.2s;
+  color: #5A6B7A; font-size: 15px; line-height: 1.7;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+
+/* CTA FINAL */
+.cta-final {
+  background: var(--preto); color: var(--branco);
+  padding: 100px 24px; text-align: center;
+}
+.cta-final h2 {
+  color: var(--branco); font-size: 52px;
+  max-width: 800px; margin: 0 auto 20px;
+}
+.cta-final p {
+  color: #A0A8B0; font-size: 17px;
+  max-width: 540px; margin: 0 auto 40px;
+}
+.cta-final .btn-primary {
+  padding: 20px 40px; font-size: 15px;
+}
+
+/* FOOTER */
+footer {
+  background: var(--preto); color: #A0A8B0;
+  padding: 60px 24px 40px;
+  border-top: 1px solid #2A3540;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--branco); font-weight: 900;
+  font-size: 18px; margin-bottom: 16px;
+}
+.footer-logo .logo-diamond { color: var(--verde); }
+.footer-info { font-size: 13px; line-height: 1.8; }
+.footer-info strong { color: var(--branco); }
+.footer-col h5 {
+  color: var(--branco); font-size: 13px;
+  font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 16px;
+  font-family: var(--mono);
+}
+.footer-col a, .footer-col p {
+  display: block; color: #A0A8B0;
+  text-decoration: none; font-size: 14px;
+  margin-bottom: 10px; line-height: 1.5;
+}
+.footer-col a:hover { color: var(--verde); }
+.footer-bottom {
+  max-width: 1200px; margin: 48px auto 0;
+  padding-top: 32px; border-top: 1px solid #2A3540;
+  font-size: 11px; color: #6B7280; line-height: 1.7;
+}
+
+/* WHATSAPP FLUTUANTE */
+.wa-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  background: var(--verde); color: var(--preto);
+  width: 60px; height: 60px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(51, 204, 102, 0.4);
+  text-decoration: none; font-size: 28px;
+  transition: all 0.2s;
+}
+.wa-float:hover { transform: scale(1.1); }
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .hero { grid-template-columns: 1fr; gap: 40px; padding: 40px 20px 60px; }
+  .hero h1 { font-size: 44px; }
+  .hero-visual { aspect-ratio: 4/3; }
+  nav { display: none; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(2) { border-right: 0; }
+  .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--borda); }
+  .funciona-grid { grid-template-columns: 1fr; }
+  .prod-grid { grid-template-columns: 1fr 1fr; }
+  .ghr-grid { grid-template-columns: 1fr; gap: 24px; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  h2 { font-size: 32px; }
+  .cta-final h2 { font-size: 36px; }
+  .calc-wrap { padding: 32px 24px; }
+  .mod-grid { grid-template-columns: 1fr 1fr; }
+  .wa-float { display: flex; }
+}
+@media (max-width: 560px) {
+  .hero h1 { font-size: 36px; }
+  .prod-grid { grid-template-columns: 1fr; }
+  .cta-header { padding: 10px 14px; font-size: 12px; }
+  .logo strong { font-size: 17px; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-diamond">◆</span>
+      <div><strong>GHR</strong> Compra Programada</div>
+    </a>
+    <nav>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#por-que">Por que a GHR</a>
+      <a href="#faq">Dúvidas</a>
+    </nav>
+    <a href="https://wa.me/5531971746067?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20GHR%20e%20quero%20uma%20simula%C3%A7%C3%A3o." class="cta-header" target="_blank">Simular agora →</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-tag">// GHR COMPRA PROGRAMADA</div>
+    <h1>Sua conquista com <span>data certa.</span></h1>
+    <p>Moto, carro, imóvel ou caminhão — sem sorteio, sem juros abusivos, com prazo de entrega definido em contrato desde o dia da assinatura.</p>
+    <div class="hero-ctas">
+      <a href="#simulador" class="btn btn-primary">Simular agora</a>
+      <a href="#como-funciona" class="btn btn-secondary">Como funciona</a>
+    </div>
+  </div>
+  <div class="hero-visual">
+    <div class="emoji-grid">
+      <span>🏍️</span>
+      <span>🚗</span>
+      <span>🏠</span>
+      <span>🚛</span>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">80</div>
+    <div class="stat-label">meses de prazo máximo</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">120</div>
+    <div class="stat-label">participantes por grupo</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2/mês</div>
+    <div class="stat-label">entregas garantidas ao grupo</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">0</div>
+    <div class="stat-label">sorteios — nunca existiu um</div>
+  </div>
+</div>
+
+<!-- COMO FUNCIONA -->
+<section id="como-funciona" class="funciona-dark">
+  <div class="container">
+    <div class="section-tag">// Como funciona</div>
+    <h2>Previsibilidade <span>não é sorteio.</span></h2>
+    <p class="section-sub">Existem duas formas de acelerar a entrega do seu bem — e elas não têm o mesmo grau de certeza. Isso muda a forma como você deve planejar.</p>
+
+    <div class="funciona-grid">
+      <div class="funciona-card">
+        <span class="funciona-badge">COMPETITIVA</span>
+        <h3>Antecipação de Parcelas</h3>
+        <p>Desde o 1º mês, você pode antecipar de 15% a 40% do valor do crédito. Quem faz a maior antecipação do grupo naquele mês é quem é contemplado.</p>
+        <p style="margin-top:14px; font-weight:700; color:#5DE682;">É uma possibilidade — não uma data garantida.</p>
+      </div>
+      <div class="funciona-card highlight">
+        <span class="funciona-badge">GARANTIDA</span>
+        <h3>Aceleração Pontual</h3>
+        <p>A partir do 3º mês, antecipando exatamente 50% do valor total, o crédito é liberado imediatamente, sem concorrência com ninguém do grupo.</p>
+        <p style="margin-top:14px; font-weight:700; color:var(--verde);">Regra matemática — sem leilão, sem disputa.</p>
+      </div>
+    </div>
+
+    <div class="funciona-nota">
+      <strong>Só duas coisas podem ser prometidas como certeza:</strong> a data contratual e a regra dos 50% a partir do 3º mês. Qualquer outra forma de antecipação é sempre apresentada como possibilidade.
+    </div>
+  </div>
+</section>
+
+<!-- CALCULADORA -->
+<section id="simulador" class="calc-section">
+  <div class="container">
+    <div class="calc-wrap">
+      <div class="section-tag">// Simulador</div>
+      <h2>Quanto fica <span>sua parcela?</span></h2>
+      <p class="section-sub">Escolha a modalidade, o valor do crédito e veja a estimativa. Sem compromisso.</p>
+
+      <div class="mod-grid" id="modGrid">
+        <button class="mod-btn active" data-mod="moto"><span class="emoji">🏍️</span>Moto</button>
+        <button class="mod-btn" data-mod="carro"><span class="emoji">🚗</span>Carro</button>
+        <button class="mod-btn" data-mod="imovel"><span class="emoji">🏠</span>Imóvel</button>
+        <button class="mod-btn" data-mod="pesados"><span class="emoji">🚛</span>Pesados</button>
+      </div>
+
+      <div class="field">
+        <label for="credito">Valor do crédito</label>
+        <input type="number" id="credito" min="0" step="1000">
+        <input type="range" id="creditoRange" min="0" max="100" step="1000">
+        <div class="range-val"><span id="rangeMin">R$ 0</span><span id="rangeMax">R$ 0</span></div>
+      </div>
+
+      <div class="field">
+        <label for="plano">Tipo de plano</label>
+        <select id="plano"></select>
+      </div>
+
+      <div class="result">
+        <div class="result-tag">// Resultado estimado</div>
+        <div class="result-row">
+          <span class="result-label" id="labelInicial">Parcela inicial</span>
+          <span class="result-value" id="outInicial">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label" id="labelPrincipal">Parcela principal</span>
+          <span class="result-value big" id="outPrincipal">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Prazo</span>
+          <span class="result-value" id="outPrazo">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total investido</span>
+          <span class="result-value" id="outTotal">—</span>
+        </div>
+      </div>
+
+      <a class="calc-cta" id="ctaWhats" href="#">Receber simulação detalhada no WhatsApp</a>
+
+      <p class="calc-disclaimer">
+        * Valores estimados com base nas tabelas vigentes. Sujeito a análise e aprovação. A Compra Programada é uma modalidade de consórcio e não representa promessa de contemplação fora das regras contratuais.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section id="produtos">
+  <div class="container">
+    <div class="section-tag">// Produtos</div>
+    <h2>Um caminho para <span>cada objetivo.</span></h2>
+    <p class="section-sub">Quatro linhas de crédito, todas seguindo a mesma lógica: sem sorteio, com análise flexível para o seu perfil.</p>
+
+    <div class="prod-grid">
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.pexels.com/photos/2116475/pexels-photo-2116475.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Motocicleta" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Motocicleta</h3>
+          <div class="prod-price">A partir de R$ 25.000</div>
+          <p>Para trabalhar, estudar ou ir mais longe — sem depender do banco.</p>
+          <a href="/moto.html" class="prod-link">Simular moto →</a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.pexels.com/photos/1545743/pexels-photo-1545743.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Automóvel" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Automóvel</h3>
+          <div class="prod-price">A partir de R$ 120.000</div>
+          <p>Ideal para quem já pesquisou financiamento e achou o custo alto demais.</p>
+          <a href="/carro.html" class="prod-link">Simular carro →</a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Imóvel Residencial" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Imóvel Residencial</h3>
+          <div class="prod-price">A partir de R$ 220.000</div>
+          <p>Planejamento real para sair do aluguel e construir patrimônio.</p>
+          <a href="/imovel.html" class="prod-link">Simular imóvel →</a>
+        </div>
+      </div>
+
+      <div class="prod-card">
+        <div class="prod-img">
+          <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Veículos Pesados" loading="lazy">
+        </div>
+        <div class="prod-body">
+          <h3>Veículos Pesados</h3>
+          <div class="prod-price">A partir de R$ 300.000</div>
+          <p>Amplie sua frota ou comece na estrada sem travar o caixa.</p>
+          <a href="/pesados.html" class="prod-link">Simular caminhão →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POR QUE A GHR -->
+<section id="por-que" class="ghr-dark">
+  <div class="container">
+    <div class="section-tag">// Por que a GHR</div>
+    <h2>Confiança não é <span>slogan.</span></h2>
+    <p class="section-sub">É certificação, presença local e clareza em cada etapa da negociação.</p>
+
+    <div class="ghr-grid">
+      <div class="ghr-item">
+        <div class="ghr-check">✓</div>
+        <div>
+          <h4>Certificação ABAC PCA-10</h4>
+          <p>Representante certificado no setor, seguindo as regras da categoria — não é "achismo".</p>
+        </div>
+      </div>
+      <div class="ghr-item">
+        <div class="ghr-check">✓</div>
+        <div>
+          <h4>Atendimento local em Sete Lagoas</h4>
+          <p>Nada de central de atendimento distante. Se precisar, dá pra conversar pessoalmente.</p>
+        </div>
+      </div>
+      <div class="ghr-item">
+        <div class="ghr-check">✓</div>
+        <div>
+          <h4>Análise flexível</h4>
+          <p>Renda informal ou alguma restrição no nome não encerram a conversa por aqui.</p>
+        </div>
+      </div>
+      <div class="ghr-item">
+        <div class="ghr-check">✓</div>
+        <div>
+          <h4>Grupos reduzidos</h4>
+          <p>120 participantes por grupo, com 2 entregas garantidas todo mês — a fila anda de verdade.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOCS -->
+<section>
+  <div class="container">
+    <div class="section-tag">// Como aderir</div>
+    <h2>Documentação <span>simples.</span></h2>
+    <p class="section-sub">Sem burocracia excessiva — isso é o que costuma ser pedido para dar entrada.</p>
+
+    <div class="docs-list">
+      <div class="doc-row"><div class="doc-check">✓</div>RG e CPF (ou CNH)</div>
+      <div class="doc-row"><div class="doc-check">✓</div>Comprovante de residência atualizado</div>
+      <div class="doc-row"><div class="doc-check">✓</div>Comprovante de renda (ou análise alternativa para renda informal)</div>
+      <div class="doc-row"><div class="doc-check">✓</div>Comprovante de estado civil</div>
+    </div>
+
+    <p class="docs-nota">
+      Renda informal ou nome com restrição? Fazemos uma análise flexível do seu perfil — <a href="https://wa.me/5531971746067" target="_blank">chame no WhatsApp</a> e conte seu caso.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq" style="background: var(--menta);">
+  <div class="container">
+    <div class="section-tag">// Dúvidas frequentes</div>
+    <h2>Direto ao <span>ponto.</span></h2>
+
+    <div class="faq-list" style="margin-top: 40px;">
+      <div class="faq-item">
+        <div class="faq-q">Existe sorteio na Compra Programada?</div>
+        <div class="faq-a">Não. Sua data de entrega já nasce definida em contrato — a contemplação antecipada acontece por regras de antecipação, não por sorteio.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso ter o nome limpo pra participar?</div>
+        <div class="faq-a">Não necessariamente. Trabalhamos com análise flexível — renda informal ou alguma restrição no nome não encerram a conversa. Cada caso é analisado individualmente e com atendimento humano.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quanto tempo demora pra sair o bem?</div>
+        <div class="faq-a">Isso depende do plano escolhido. A data de entrega contratual é a sua referência principal — ela já nasce definida no contrato. Antecipações podem acontecer, mas são sempre apresentadas como possibilidade, não como garantia.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Dá pra acelerar a entrega?</div>
+        <div class="faq-a">Sim, de duas formas. A primeira é a <strong>Aceleração Pontual</strong>: a partir do 3º mês, antecipando 50% do valor total, o crédito é liberado imediatamente e sem concorrência. A segunda é a <strong>Antecipação Competitiva</strong>: entre 15% e 40% a partir do 1º mês, mas dependendo das condições do grupo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Isso é confiável?</div>
+        <div class="faq-a">Sim. Somos representantes autorizados da CRED CAR e de outras administradoras reguladas. O contrato define todos os direitos e obrigações. Além disso, temos certificação ABAC PCA-10 e atendimento local em Sete Lagoas/MG.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quantas pessoas tem no grupo?</div>
+        <div class="faq-a">120 participantes por grupo, com 2 entregas garantidas por mês. Isso significa que a fila anda de verdade — não é um grupo inflado onde ninguém sai.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qual a diferença entre consórcio e financiamento?</div>
+        <div class="faq-a">No financiamento, você paga juros bancários sobre o valor. Na Compra Programada, você paga uma taxa de administração diluída no plano — sem juros. Além disso, no financiamento a análise é rígida; aqui, é flexível e humana.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso dar entrada?</div>
+        <div class="faq-a">Alguns planos pedem uma primeira parcela maior. Outros começam com parcelas menores do 1º ao 12º mês. Existem 4 variações de plano para se adaptar ao seu momento — o consultor vai te mostrar a melhor opção.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <div class="section-tag" style="color: var(--verde);">// Próximo passo</div>
+    <h2>Não compre um "talvez". <span>Entenda o que está em contrato.</span></h2>
+    <p>Fale agora com um especialista certificado e receba uma simulação sem compromisso.</p>
+    <a href="https://wa.me/5531971746067?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20uma%20simula%C3%A7%C3%A3o%20sem%20compromisso." class="btn btn-primary" target="_blank">Chamar no WhatsApp</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <span class="logo-diamond">◆</span> GHR <span style="font-weight:400; opacity:0.7; font-size:14px; margin-left:4px;">Compra Programada</span>
+      </div>
+      <div class="footer-info">
+        <strong>Gustavo Henrique Rocha</strong><br>
+        Representante autorizado CRED CAR<br>
+        Certificação ABAC PCA-10<br>
+        Sete Lagoas, MG
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <a href="https://wa.me/5531971746067" target="_blank">(31) 9 7174-6067</a>
+      <a href="https://instagram.com/ghrcompraprogramada" target="_blank">@ghrcompraprogramada</a>
+      <p>Sete Lagoas, MG</p>
+    </div>
+    <div class="footer-col">
+      <h5>Navegação</h5>
+      <a href="#como-funciona">Como funciona</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#faq">Dúvidas</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    A Compra Programada é uma modalidade de consórcio. Crédito sujeito a análise e aprovação. Este site não representa promessa de aprovação nem de antecipação de contemplação fora das regras contratuais descritas acima.
+  </div>
+</footer>
+
+<!-- WHATSAPP FIXO MOBILE -->
+<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+
+<script>
+// ============ DADOS REAIS DAS TABELAS CRED CAR ============
+const TABELAS = {
+  moto: {
+    nome: "Motocicleta", prazo: 80,
+    tipos: { A:{desc:"1 parcela alta + 79x"}, B:{desc:"2 parcelas altas + 78x"}, C:{desc:"3 parcelas altas + 77x"}, D:{desc:"4 parcelas altas + 76x"} },
+    dados: [
+      [20000,2750.00,350.00],[25000,3435.00,435.00],[30000,4125.00,525.00],
+      [35000,4812.00,612.00],[40000,5500.00,700.00],[45000,6188.00,788.00],
+      [50000,6875.00,875.00],[55000,7562.00,962.00],[60000,8250.00,1050.00],
+      [65000,8938.00,1138.00],[70000,9625.50,1225.50],[75000,10312.50,1312.50],
+      [80000,11000.00,1400.00],[85000,11688.00,1488.00],[90000,12375.00,1575.00],
+      [95000,13063.00,1663.00],[100000,13750.00,1750.00]
+    ]
+  },
+  carro: {
+    nome: "Automóvel", prazo: 120,
+    tipos: { MIX:{desc:"1º a 12º menor + 13º a 120º maior"} },
+    dados: [
+      [100000,1000.00,1296.29],[120000,1200.00,1555.55],[130000,1300.00,1685.18],
+      [140000,1400.00,1814.81],[150000,1500.00,1944.44],[160000,1600.00,2074.07],
+      [170000,1700.00,2203.70],[180000,1800.00,2333.33],[190000,1900.00,2462.96],
+      [200000,2000.00,2592.59]
+    ]
+  },
+  imovel: {
+    nome: "Imóvel Residencial", prazo: 240,
+    tipos: { CONV:{desc:"Convencional"}, FLEX:{desc:"Flex (1º a 12º maior)"}, B77:{desc:"B77 (1ª alta + 239x)"} },
+    convencional: [
+      [200000,1500.00,1228.07],[220000,1650.00,1350.87],[230000,1725.00,1412.28],
+      [240000,1800.00,1473.68],[250000,1875.00,1535.08],[260000,1950.00,1596.49],
+      [270000,2025.00,1657.89],[280000,2100.00,1719.29],[290000,2175.00,1780.70],
+      [300000,2250.00,1842.10],[320000,2400.00,1964.91],[340000,2550.00,2087.71],
+      [350000,2625.00,2149.12],[360000,2700.00,2210.52],[370000,2775.00,2271.92],
+      [380000,2850.00,2333.33],[390000,2925.00,2394.73],[400000,3000.00,2456.14],
+      [500000,3750.00,3070.17]
+    ],
+    flex: [
+      [200000,1833.33,1228.07],[220000,2016.66,1350.87],[230000,2108.33,1412.28],
+      [240000,2200.00,1473.68],[250000,2291.66,1535.08],[260000,2383.33,1596.49],
+      [270000,2475.00,1657.89],[280000,2566.66,1719.29],[290000,2658.33,1780.70],
+      [300000,2750.00,1842.10],[320000,2933.33,1964.91],[340000,3116.66,2087.71],
+      [350000,3208.33,2149.12],[360000,3300.00,2210.52],[370000,3391.66,2271.92],
+      [380000,3483.33,2333.33],[390000,3575.00,2394.73],[400000,3666.66,2456.14],
+      [500000,4583.33,3070.17]
+    ],
+    b77: [
+      [220000,23191.66,1191.66],[240000,25300.00,1300.00],[260000,27408.33,1408.33],
+      [280000,29516.66,1516.66],[300000,31625.00,1625.00],[320000,33733.33,1733.33],
+      [340000,35841.66,1841.66],[360000,37950.00,1950.00],[380000,40058.33,2058.33],
+      [400000,42166.66,2166.66],[420000,44275.00,2275.00],[440000,46383.33,2383.33],
+      [460000,48491.66,2491.66],[480000,50600.00,2600.00],[500000,52708.33,2708.33]
+    ]
+  },
+  pesados: {
+    nome: "Veículos Pesados", prazo: 120,
+    tipos: { CONV:{desc:"Convencional (1ª alta + 119x)"}, FLEX:{desc:"Flex (1º a 12º menor + 13º a 120º maior)"} },
+    convencional: [
+      [220000,24383.33,2383.33],[240000,26600.00,2600.00],[260000,28816.66,2816.66],
+      [280000,31033.33,3033.33],[300000,33250.00,3250.00],[320000,35466.66,3466.66],
+      [340000,37683.33,3683.33],[360000,39900.00,3900.00],[380000,42116.66,4116.66],
+      [400000,44333.33,4333.33],[420000,46550.00,4550.00],[440000,48766.66,4766.66],
+      [460000,50983.33,4983.33],[480000,53200.00,5200.00],[500000,55416.66,5416.66]
+    ],
+    flex: [
+      [220000,2200.00,2607.40],[240000,2400.00,2844.44],[260000,2600.00,3081.48],
+      [280000,2800.00,3318.51],[300000,3000.00,3555.55],[320000,3200.00,3792.59],
+      [340000,3400.00,4029.62],[360000,3600.00,4266.66],[380000,3800.00,4503.70],
+      [400000,4000.00,4740.76],[420000,4200.00,4977.77],[440000,4400.00,5214.81],
+      [460000,4600.00,5451.85],[480000,4800.00,5688.88],[500000,5000.00,5925.92]
+    ]
+  }
+};
+
+const WHATSAPP = "5531971746067";
+let estado = { mod: "moto", tipoAtual: "A" };
+const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+
+function getDadosAtuais() {
+  const t = TABELAS[estado.mod];
+  if (estado.mod === "moto" || estado.mod === "carro") return t.dados;
+  if (estado.mod === "imovel") {
+    if (estado.tipoAtual === "CONV") return t.convencional;
+    if (estado.tipoAtual === "FLEX") return t.flex;
+    return t.b77;
+  }
+  if (estado.mod === "pesados") return estado.tipoAtual === "CONV" ? t.convencional : t.flex;
+  return [];
+}
+
+function acharLinha(valor) {
+  const dados = getDadosAtuais();
+  if (!dados.length) return null;
+  let melhor = dados[0];
+  for (const d of dados) { if (valor >= d[0]) melhor = d; }
+  return melhor;
+}
+
+function atualizarRange() {
+  const dados = getDadosAtuais();
+  if (!dados.length) return;
+  const min = dados[0][0], max = dados[dados.length-1][0];
+  const range = document.getElementById('creditoRange');
+  const input = document.getElementById('credito');
+  range.min = min; range.max = max; range.step = 1000;
+  if (+input.value < min || +input.value > max) input.value = min;
+  range.value = input.value;
+  document.getElementById('rangeMin').textContent = fmt(min);
+  document.getElementById('rangeMax').textContent = fmt(max);
+}
+
+function popularPlanos() {
+  const t = TABELAS[estado.mod];
+  const sel = document.getElementById('plano');
+  sel.innerHTML = "";
+  Object.keys(t.tipos).forEach(k => {
+    const opt = document.createElement('option');
+    opt.value = k; opt.textContent = t.tipos[k].desc;
+    sel.appendChild(opt);
+  });
+  estado.tipoAtual = Object.keys(t.tipos)[0];
+  sel.value = estado.tipoAtual;
+}
+
+function calcular() {
+  const valor = +document.getElementById('credito').value || 0;
+  const linha = acharLinha(valor);
+  if (!linha) return;
+  const [cred, v1, v2] = linha;
+  const prazo = TABELAS[estado.mod].prazo;
+  let parcelaInicial, parcelaPrincipal, totalPago, labelIni, labelPrin;
+
+  if (estado.mod === "moto") {
+    const t = TABELAS.moto.tipos[estado.tipoAtual];
+    parcelaInicial = v1; parcelaPrincipal = v2;
+    labelIni = `${t.iniciais || (estado.tipoAtual === "A" ? 1 : estado.tipoAtual === "B" ? 2 : estado.tipoAtual === "C" ? 3 : 4)}x parcela inicial`;
+    labelPrin = `${t.restantes || (estado.tipoAtual === "A" ? 79 : estado.tipoAtual === "B" ? 78 : estado.tipoAtual === "C" ? 77 : 76)}x parcela`;
+    const n = estado.tipoAtual === "A" ? 1 : estado.tipoAtual === "B" ? 2 : estado.tipoAtual === "C" ? 3 : 4;
+    totalPago = (parcelaInicial * n) + (parcelaPrincipal * (80 - n));
+  } else if (estado.mod === "carro") {
+    parcelaInicial = v1; parcelaPrincipal = v2;
+    labelIni = "1º a 12º parcela"; labelPrin = "13º a 120º parcela";
+    totalPago = (parcelaInicial * 12) + (parcelaPrincipal * 108);
+  } else if (estado.mod === "imovel") {
+    if (estado.tipoAtual === "B77") {
+      parcelaInicial = v1; parcelaPrincipal = v2;
+      labelIni = "1ª parcela"; labelPrin = "2ª a 240ª parcela";
+      totalPago = parcelaInicial + (parcelaPrincipal * 239);
+    } else {
+      parcelaInicial = v1; parcelaPrincipal = v2;
+      labelIni = "1º a 12º parcela"; labelPrin = "Parcela convencional";
+      totalPago = (parcelaInicial * 12) + (parcelaPrincipal * 228);
+    }
+  } else if (estado.mod === "pesados") {
+    if (estado.tipoAtual === "CONV") {
+      parcelaInicial = v1; parcelaPrincipal = v2;
+      labelIni = "1ª parcela"; labelPrin = "2ª a 120ª parcela";
+      totalPago = parcelaInicial + (parcelaPrincipal * 119);
+    } else {
+      parcelaInicial = v1; parcelaPrincipal = v2;
+      labelIni = "1º a 12º parcela"; labelPrin = "13º a 120º parcela";
+      totalPago = (parcelaInicial * 12) + (parcelaPrincipal * 108);
+    }
+  }
+
+  document.getElementById('labelInicial').textContent = labelIni;
+  document.getElementById('labelPrincipal').textContent = labelPrin;
+  document.getElementById('outInicial').textContent = fmt(parcelaInicial);
+  document.getElementById('outPrincipal').textContent = fmt(parcelaPrincipal);
+  document.getElementById('outPrazo').textContent = prazo + " meses";
+  document.getElementById('outTotal').textContent = fmt(totalPago);
+
+  const msg = encodeURIComponent(
+    `Olá! Vi o simulador no site da GHR e quero uma análise personalizada.\n\n` +
+    `• Modalidade: ${TABELAS[estado.mod].nome}\n` +
+    `• Crédito: ${fmt(cred)}\n` +
+    `• Plano: ${TABELAS[estado.mod].tipos[estado.tipoAtual].desc}\n` +
+    `• Parcela inicial: ${fmt(parcelaInicial)}\n` +
+    `• Parcela principal: ${fmt(parcelaPrincipal)}`
+  );
+  document.getElementById('ctaWhats').href = `https://wa.me/${WHATSAPP}?text=${msg}`;
+}
+
+// Eventos
+document.querySelectorAll('.mod-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.mod-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    estado.mod = btn.dataset.mod;
+    popularPlanos();
+    atualizarRange();
+    calcular();
+  });
+});
+document.getElementById('plano').addEventListener('change', e => {
+  estado.tipoAtual = e.target.value;
+  atualizarRange(); calcular();
+});
+document.getElementById('credito').addEventListener('input', e => {
+  document.getElementById('creditoRange').value = e.target.value;
+  calcular();
+});
+document.getElementById('creditoRange').addEventListener('input', e => {
+  document.getElementById('credito').value = e.target.value;
+  calcular();
+});
+
+// FAQ toggle
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    q.parentElement.classList.toggle('open');
+  });
+});
+
+// Init
+popularPlanos();
+atualizarRange();
+calcular();
+</script>
+
+</body>
+</html>

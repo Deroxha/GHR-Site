@@ -1,0 +1,15 @@
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Arquivos temporários do Office
+~$*
+
+# Dependências
+node_modules/
+
+# Configuração pessoal
+.env
+.env.*
+.vscode/

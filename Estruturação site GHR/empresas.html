@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHR para Empresas — Frota própria sem travar o caixa | Parcerias</title>
+<meta name="description" content="Compra Programada corporativa para transportadoras, frotas e agronegócio. Amplie sua frota sem juros bancários. Programa de parcerias para vendedores.">
+<meta property="og:title" content="GHR para Empresas — Frota própria sem travar o caixa">
+<meta property="og:description" content="Compra Programada corporativa. Programa de parcerias para vendedores.">
+
+<style>
+:root {
+  --verde: #33CC66;
+  --verde-escuro: #0B3D1A;
+  --menta: #E0F7E8;
+  --menta-clara: #F4F8F4;
+  --escuro: #1D2939;
+  --preto: #000000;
+  --branco: #FFFFFF;
+  --prata: #C0C0C0;
+  --borda: #D5E5DC;
+  --mono: 'JetBrains Mono', 'Courier New', monospace;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+  background: var(--menta-clara);
+  color: var(--escuro);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+header {
+  position: sticky; top: 0; z-index: 100;
+  background: var(--menta-clara);
+  border-bottom: 1px solid var(--borda);
+  padding: 14px 24px;
+}
+.header-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 20px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 900; font-size: 18px; letter-spacing: -0.5px;
+  text-decoration: none; color: var(--escuro); flex-shrink: 0;
+}
+.logo-diamond { color: var(--verde); font-size: 16px; }
+nav { display: flex; gap: 24px; align-items: center; }
+nav a { color: var(--escuro); text-decoration: none; font-size: 14px; font-weight: 500; }
+nav a:hover { color: var(--verde); }
+.cta-header {
+  background: var(--verde); color: var(--preto);
+  padding: 12px 20px; font-weight: 800; font-size: 13px;
+  text-decoration: none; white-space: nowrap;
+}
+.cta-header:hover { background: #2AB857; }
+
+.hero {
+  background: linear-gradient(135deg, var(--verde-escuro) 0%, var(--preto) 100%);
+  color: var(--branco);
+  padding: 80px 24px 100px;
+  position: relative; overflow: hidden;
+}
+.hero::before, .hero::after {
+  content: ''; position: absolute;
+  width: 40px; height: 40px; border: 3px solid var(--verde);
+}
+.hero::before { top: 32px; left: 32px; border-right: 0; border-bottom: 0; }
+.hero::after { bottom: 32px; right: 32px; border-left: 0; border-top: 0; }
+.hero-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.1fr 1fr; gap: 60px; align-items: center;
+  position: relative;
+}
+.hero-tag {
+  font-family: var(--mono); font-size: 12px; color: var(--verde);
+  letter-spacing: 2px; margin-bottom: 20px;
+}
+.hero h1 {
+  font-size: 52px; font-weight: 900; line-height: 1.05;
+  letter-spacing: -2px; margin-bottom: 24px;
+}
+.hero h1 span { color: var(--verde); }
+.hero p {
+  font-size: 17px; color: #C0D0C8; margin-bottom: 32px; max-width: 540px;
+}
+.hero-ctas { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+  padding: 16px 28px; font-weight: 800; font-size: 14px;
+  text-decoration: none; letter-spacing: 0.5px; display: inline-block;
+}
+.btn-primary { background: var(--verde); color: var(--preto); }
+.btn-primary:hover { background: #2AB857; }
+.btn-secondary {
+  background: transparent; color: var(--branco);
+  border: 2px solid var(--branco);
+}
+.btn-secondary:hover { background: var(--branco); color: var(--escuro); }
+
+.stats {
+  max-width: 1200px; margin: -40px auto 60px;
+  padding: 0 24px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  background: var(--branco); border: 1px solid var(--borda);
+  position: relative; z-index: 10;
+}
+.stat { padding: 32px 24px; border-right: 1px solid var(--borda); text-align: center; }
+.stat:last-child { border-right: 0; }
+.stat-num {
+  font-size: 36px; font-weight: 900; color: var(--verde);
+  line-height: 1; margin-bottom: 8px; letter-spacing: -1px;
+}
+.stat-label { font-size: 12px; color: #5A6B7A; }
+
+section { padding: 70px 24px; }
+.container { max-width: 1200px; margin: 0 auto; }
+.section-tag {
+  font-family: var(--mono); font-size: 12px; color: var(--verde);
+  letter-spacing: 2px; margin-bottom: 12px;
+}
+h2 {
+  font-size: 42px; font-weight: 900; letter-spacing: -1.5px;
+  line-height: 1.1; margin-bottom: 16px;
+}
+h2 span { color: var(--verde); }
+.section-sub { font-size: 16px; color: #5A6B7A; max-width: 640px; margin-bottom: 48px; }
+
+/* SETORES */
+.setores-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  margin-top: 40px;
+}
+.setor-card {
+  background: var(--branco); border: 1px solid var(--borda);
+  padding: 32px 26px; transition: all 0.2s;
+}
+.setor-card:hover { border-color: var(--verde); transform: translateY(-4px); }
+.setor-icon {
+  width: 48px; height: 48px; background: var(--menta);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px; margin-bottom: 18px;
+}
+.setor-card h3 { font-size: 19px; font-weight: 800; margin-bottom: 10px; }
+.setor-card p { font-size: 14px; color: #5A6B7A; }
+
+/* BENEFÍCIOS */
+.benef-dark { background: var(--preto); color: var(--branco); }
+.benef-dark h2 { color: var(--branco); }
+.benef-dark .section-sub { color: #A0A8B0; }
+.benef-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px 48px;
+  margin-top: 40px;
+}
+.benef-item { display: flex; gap: 16px; }
+.benef-check {
+  width: 28px; height: 28px; flex-shrink: 0;
+  border: 2px solid var(--verde); color: var(--verde);
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 900; font-size: 14px;
+}
+.benef-item h4 { font-size: 17px; font-weight: 800; margin-bottom: 6px; }
+.benef-item p { font-size: 14px; color: #A0A8B0; }
+
+/* PARCERIA */
+.parceria-section { background: var(--menta); }
+.parceria-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+  margin-top: 40px;
+}
+.parceria-card {
+  background: var(--branco); border: 1px solid var(--borda);
+  padding: 36px 32px;
+}
+.parceria-card.highlight {
+  border: 2px solid var(--verde);
+  background: var(--branco);
+}
+.parceria-badge {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px;
+  padding: 4px 10px; border: 1px solid var(--verde); color: var(--verde);
+  display: inline-block; margin-bottom: 18px;
+}
+.parceria-card h3 { font-size: 24px; font-weight: 900; margin-bottom: 16px; }
+.parceria-card ul { list-style: none; margin-bottom: 24px; }
+.parceria-card ul li {
+  padding: 8px 0 8px 28px; position: relative; font-size: 15px;
+  border-bottom: 1px solid var(--menta-clara);
+}
+.parceria-card ul li::before {
+  content: '✓'; position: absolute; left: 0;
+  color: var(--verde); font-weight: 900;
+}
+
+/* SIMULADOR CORPORATIVO */
+.calc-section { background: var(--preto); }
+.calc-section h2 { color: var(--branco); }
+.calc-section .section-sub { color: #A0A8B0; }
+.calc-wrap {
+  max-width: 800px; margin: 0 auto;
+  background: var(--branco); padding: 48px 40px;
+  position: relative;
+}
+.calc-wrap::before, .calc-wrap::after {
+  content: ''; position: absolute; width: 24px; height: 24px;
+  border: 3px solid var(--verde);
+}
+.calc-wrap::before { top: -3px; left: -3px; border-right: 0; border-bottom: 0; }
+.calc-wrap::after { bottom: -3px; right: -3px; border-left: 0; border-top: 0; }
+
+.field { margin-bottom: 24px; }
+.field label {
+  display: block; font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--verde); margin-bottom: 8px;
+  font-family: var(--mono);
+}
+.field input, .field select {
+  width: 100%; padding: 14px 16px;
+  border: 1px solid var(--borda); font-size: 16px;
+  font-family: inherit; background: var(--branco); color: var(--escuro);
+}
+.field input:focus, .field select:focus { outline: none; border-color: var(--verde); }
+
+.result {
+  background: var(--escuro); color: var(--branco);
+  padding: 28px 24px; margin-top: 8px;
+}
+.result-tag {
+  font-family: var(--mono); font-size: 11px; color: var(--verde);
+  letter-spacing: 1.5px; margin-bottom: 16px;
+}
+.result-row {
+  display: flex; justify-content: space-between; align-items: baseline;
+  padding: 10px 0; border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.result-row:last-child { border-bottom: 0; }
+.result-label { font-size: 13px; opacity: 0.7; }
+.result-value { font-size: 20px; font-weight: 800; }
+.result-value.big { font-size: 32px; color: var(--verde); }
+
+.calc-cta {
+  display: block; width: 100%; padding: 18px;
+  background: var(--verde); color: var(--preto);
+  text-align: center; text-decoration: none;
+  font-weight: 800; font-size: 16px; letter-spacing: 0.5px;
+  margin-top: 20px; font-family: inherit;
+}
+.calc-cta:hover { background: #2AB857; }
+
+/* FORMULÁRIO */
+.form-section { background: var(--menta); }
+.form-wrap {
+  max-width: 640px; margin: 0 auto;
+  background: var(--branco); padding: 48px 40px;
+  border: 1px solid var(--borda);
+}
+.form-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.form-field { margin-bottom: 20px; }
+.form-field.full { grid-column: 1 / -1; }
+.form-field label {
+  display: block; font-size: 12px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 1px;
+  color: var(--verde); margin-bottom: 8px;
+  font-family: var(--mono);
+}
+.form-field input, .form-field select, .form-field textarea {
+  width: 100%; padding: 14px 16px;
+  border: 1px solid var(--borda); font-size: 15px;
+  font-family: inherit; background: var(--branco); color: var(--escuro);
+}
+.form-field input:focus, .form-field select:focus, .form-field textarea:focus {
+  outline: none; border-color: var(--verde);
+}
+.form-field textarea { resize: vertical; min-height: 100px; }
+.form-submit {
+  width: 100%; padding: 18px;
+  background: var(--verde); color: var(--preto);
+  border: 0; font-weight: 800; font-size: 16px;
+  letter-spacing: 0.5px; cursor: pointer;
+  font-family: inherit; margin-top: 8px;
+}
+.form-submit:hover { background: #2AB857; }
+.form-disclaimer {
+  font-size: 11px; color: #5A6B7A; margin-top: 16px; line-height: 1.6;
+}
+
+/* FAQ */
+.faq-list { max-width: 840px; margin-top: 40px; }
+.faq-item { border-bottom: 1px solid var(--borda); }
+.faq-q {
+  padding: 22px 0; font-size: 17px; font-weight: 700;
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; gap: 16px; user-select: none;
+}
+.faq-q::after {
+  content: '+'; font-size: 24px; color: var(--verde);
+  font-weight: 400; transition: transform 0.2s;
+}
+.faq-item.open .faq-q::after { content: '−'; }
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.2s;
+  color: #5A6B7A; font-size: 15px; line-height: 1.7;
+}
+.faq-item.open .faq-a { max-height: 400px; padding-bottom: 22px; }
+
+/* CTA FINAL */
+.cta-final {
+  background: var(--preto); color: var(--branco);
+  padding: 90px 24px; text-align: center;
+}
+.cta-final h2 {
+  color: var(--branco); font-size: 48px;
+  max-width: 800px; margin: 0 auto 20px;
+}
+.cta-final p {
+  color: #A0A8B0; font-size: 17px;
+  max-width: 540px; margin: 0 auto 40px;
+}
+.cta-final .btn-primary { padding: 20px 40px; font-size: 15px; }
+
+footer {
+  background: var(--preto); color: #A0A8B0;
+  padding: 60px 24px 40px;
+  border-top: 1px solid #2A3540;
+}
+.footer-inner {
+  max-width: 1200px; margin: 0 auto;
+  display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 48px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--branco); font-weight: 900;
+  font-size: 18px; margin-bottom: 16px;
+}
+.footer-info { font-size: 13px; line-height: 1.8; }
+.footer-info strong { color: var(--branco); }
+.footer-col h5 {
+  color: var(--branco); font-size: 13px;
+  font-weight: 800; letter-spacing: 1px;
+  text-transform: uppercase; margin-bottom: 16px;
+  font-family: var(--mono);
+}
+.footer-col a, .footer-col p {
+  display: block; color: #A0A8B0;
+  text-decoration: none; font-size: 14px;
+  margin-bottom: 10px; line-height: 1.5;
+}
+.footer-col a:hover { color: var(--verde); }
+.footer-bottom {
+  max-width: 1200px; margin: 48px auto 0;
+  padding-top: 32px; border-top: 1px solid #2A3540;
+  font-size: 11px; color: #6B7280; line-height: 1.7;
+}
+
+.wa-float {
+  position: fixed; bottom: 24px; right: 24px; z-index: 200;
+  background: var(--verde); color: var(--preto);
+  width: 60px; height: 60px; border-radius: 50%;
+  display: none; align-items: center; justify-content: center;
+  box-shadow: 0 8px 24px rgba(51, 204, 102, 0.4);
+  text-decoration: none; font-size: 28px;
+}
+
+@media (max-width: 960px) {
+  .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+  .hero h1 { font-size: 36px; }
+  nav { display: none; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(2) { border-right: 0; }
+  .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--borda); }
+  .setores-grid, .benef-grid, .parceria-grid { grid-template-columns: 1fr; }
+  .form-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  h2 { font-size: 30px; }
+  .cta-final h2 { font-size: 32px; }
+  .calc-wrap, .form-wrap { padding: 32px 24px; }
+  .wa-float { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-diamond">◆</span>
+      <div><strong>GHR</strong> Compra Programada</div>
+    </a>
+    <nav>
+      <a href="/">Início</a>
+      <a href="#setores">Setores</a>
+      <a href="#parceria">Seja Parceiro</a>
+      <a href="#simulador">Simulador</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a href="#contato" class="cta-header">Solicitar proposta →</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">// GHR PARA EMPRESAS</div>
+      <h1>Amplie sua frota <span>sem travar o caixa.</span></h1>
+      <p>Compra Programada corporativa para transportadoras, frotas, agronegócio e construção. Sem juros bancários, com data de entrega definida em contrato. E um programa de parcerias para profissionais de vendas que querem crescer junto.</p>
+      <div class="hero-ctas">
+        <a href="#contato" class="btn btn-primary">Solicitar proposta</a>
+        <a href="#parceria" class="btn btn-secondary">Seja um parceiro</a>
+      </div>
+    </div>
+    <div style="aspect-ratio: 4/3; background: rgba(255,255,255,0.03); border: 1px solid rgba(51,204,102,0.3); overflow: hidden;">
+      <img src="https://images.pexels.com/photos/2199293/pexels-photo-2199293.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="Frota de veículos pesados" style="width:100%;height:100%;object-fit:cover;">
+    </div>
+  </div>
+</section>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">120</div>
+    <div class="stat-label">meses de prazo para pesados</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">120</div>
+    <div class="stat-label">participantes por grupo</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">2/mês</div>
+    <div class="stat-label">entregas garantidas</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">1,5%</div>
+    <div class="stat-label">comissão inicial para parceiros</div>
+  </div>
+</div>
+
+<!-- SETORES -->
+<section id="setores">
+  <div class="container">
+    <div class="section-tag">// Setores atendidos</div>
+    <h2>Para quem <span>move a economia.</span></h2>
+    <p class="section-sub">Empresas que precisam de frota própria e querem fugir dos juros bancários do financiamento tradicional.</p>
+
+    <div class="setores-grid">
+      <div class="setor-card">
+        <div class="setor-icon">🚛</div>
+        <h3>Transporte e Logística</h3>
+        <p>Renove ou amplie a frota de caminhões, carretas e implementos sem comprometer o capital de giro.</p>
+      </div>
+      <div class="setor-card">
+        <div class="setor-icon">🌾</div>
+        <h3>Agronegócio</h3>
+        <p>Caminhões, implementos e veículos de apoio para a operação rural. Planejamento de safra com previsibilidade.</p>
+      </div>
+      <div class="setor-card">
+        <div class="setor-icon">🏗️</div>
+        <h3>Construção e Mineração</h3>
+        <p>Frotas de apoio, caminhões basculantes e veículos de carga para manter a operação rodando.</p>
+      </div>
+      <div class="setor-card">
+        <div class="setor-icon">📦</div>
+        <h3>Distribuição e Atacado</h3>
+        <p>Vans, caminhões leves e veículos de entrega para ampliar cobertura sem descapitalizar.</p>
+      </div>
+      <div class="setor-card">
+        <div class="setor-icon">🏢</div>
+        <h3>Frotas Corporativas</h3>
+        <p>Carros e utilitários para equipes de campo, gestores e representantes comerciais.</p>
+      </div>
+      <div class="setor-card">
+        <div class="setor-icon">🤝</div>
+        <h3>Locadoras e Revendas</h3>
+        <p>Amplie o portfólio de veículos com planejamento de aquisição sem juros.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="benef-dark">
+  <div class="container">
+    <div class="section-tag">// Vantagens corporativas</div>
+    <h2>Frota própria sem <span>juros bancários.</span></h2>
+    <p class="section-sub">A Compra Programada funciona como ferramenta de gestão financeira: você planeja a aquisição com previsibilidade e sem comprometer o caixa da operação.</p>
+
+    <div class="benef-grid">
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Sem juros bancários</h4>
+          <p>Composição com taxa de administração diluída. Libera capital de giro para a operação.</p>
+        </div>
+      </div>
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Data de entrega em contrato</h4>
+          <p>Planejamento real, sem depender de sorteio ou de análise rígida de banco.</p>
+        </div>
+      </div>
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Análise flexível para empresas</h4>
+          <p>MEI, LTDA, autônomos e transportadores individuais. Cada caso é analisado individualmente.</p>
+        </div>
+      </div>
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Parcelas que cabem no fluxo</h4>
+          <p>Planos convencional e flex, adaptados ao fluxo de caixa da empresa.</p>
+        </div>
+      </div>
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Regra dos 50% para acelerar</h4>
+          <p>A partir do 3º mês, com 50% pago, a liberação é imediata, sem concorrência com o grupo.</p>
+        </div>
+      </div>
+      <div class="benef-item">
+        <div class="benef-check">✓</div>
+        <div>
+          <h4>Atendimento dedicado</h4>
+          <p>Consultor exclusivo para sua empresa, do primeiro contato ao pós-venda.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARCERIA -->
+<section id="parceria" class="parceria-section">
+  <div class="container">
+    <div class="section-tag">// Programa de parcerias</div>
+    <h2>Seja um <span>parceiro GHR.</span></h2>
+    <p class="section-sub">Para profissionais de vendas, corretores, consultores e empreendedores que querem uma renda extra ou uma nova carreira.</p>
+
+    <div class="parceria-grid">
+      <div class="parceria-card">
+        <span class="parceria-badge">O QUE VOCÊ RECEBE</span>
+        <h3>Suporte completo</h3>
+        <ul>
+          <li>Comissão de <strong>1,5% até R$ 800 mil</strong> / <strong>2% acima</strong></li>
+          <li>Pagamento <strong>quinzenal</strong></li>
+          <li>Treinamento de vendas e materiais prontos</li>
+          <li>CRM e sistema de gestão de leads</li>
+          <li>Acesso à base de conhecimento e simuladores</li>
+          <li>Suporte humano do time GHR</li>
+        </ul>
+      </div>
+
+      <div class="parceria-card highlight">
+        <span class="parceria-badge">O QUE ESPERAMOS</span>
+        <h3>Perfil de parceiro</h3>
+        <ul>
+          <li>Experiência em vendas (não obrigatória)</li>
+          <li>Vontade de aprender e crescer</li>
+          <li>Comprometimento com transparência</li>
+          <li>Boa comunicação e relacionamento</li>
+          <li>Disciplina para seguir o processo</li>
+          <li>Alinhamento com os valores GHR</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="text-align: center; margin-top: 48px;">
+      <a href="#contato" class="btn btn-primary" style="padding: 18px 36px; font-size: 15px;">Quero ser parceiro</a>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULADOR CORPORATIVO -->
+<section id="simulador" class="calc-section">
+  <div class="container">
+    <div class="section-tag">// Simulador corporativo</div>
+    <h2>Quanto fica a parcela <span>da sua frota?</span></h2>
+    <p class="section-sub">Selecione a modalidade, o valor do crédito e veja a estimativa. Para propostas personalizadas, fale com um consultor.</p>
+
+    <div class="calc-wrap">
+      <div class="field">
+        <label for="modalidade">Modalidade</label>
+        <select id="modalidade">
+          <option value="pesados">Veículos Pesados (Caminhão, Carreta, Implemento)</option>
+          <option value="carro">Automóvel (Utilitário, Van, Carro)</option>
+          <option value="moto">Motocicleta (Frota de Entregas)</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="credito">Valor do crédito (por veículo)</label>
+        <input type="number" id="credito" min="50000" max="500000" step="10000" value="300000">
+        <input type="range" id="creditoRange" min="50000" max="500000" step="10000" value="300000">
+        <div style="display:flex;justify-content:space-between;font-size:11px;color:#5A6B7A;margin-top:4px;font-family:var(--mono);">
+          <span>R$ 50.000</span><span>R$ 500.000</span>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="qtd">Quantidade de veículos</label>
+        <input type="number" id="qtd" min="1" max="50" value="1">
+      </div>
+
+      <div class="field">
+        <label for="plano">Tipo de plano</label>
+        <select id="plano">
+          <option value="CONV">Convencional — 1ª parcela alta + restantes menores</option>
+          <option value="FLEX">Flex — 1º a 12º menor + 13º em diante maior</option>
+        </select>
+      </div>
+
+      <div class="result">
+        <div class="result-tag">// Resultado estimado</div>
+        <div class="result-row">
+          <span class="result-label" id="labelInicial">Parcela inicial</span>
+          <span class="result-value" id="outInicial">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label" id="labelPrincipal">Parcela principal</span>
+          <span class="result-value big" id="outPrincipal">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Prazo</span>
+          <span class="result-value" id="outPrazo">120 meses</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total investido (1 veículo)</span>
+          <span class="result-value" id="outTotal">—</span>
+        </div>
+        <div class="result-row">
+          <span class="result-label">Total investido (frota)</span>
+          <span class="result-value" id="outTotalFrota" style="color:var(--verde);">—</span>
+        </div>
+      </div>
+
+      <a class="calc-cta" id="ctaWhats" href="#">Solicitar proposta personalizada no WhatsApp</a>
+
+      <p style="font-size:11px;color:#5A6B7A;margin-top:20px;line-height:1.6;">
+        * Valores estimados com base nas tabelas vigentes. Sujeito a análise e aprovação. A Compra Programada é uma modalidade de consórcio e não representa promessa de contemplação fora das regras contratuais.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- FORMULÁRIO -->
+<section id="contato" class="form-section">
+  <div class="container">
+    <div class="section-tag">// Contato</div>
+    <h2>Solicite uma <span>proposta.</span></h2>
+    <p class="section-sub">Preencha o formulário e nossa equipe entra em contato para entender a necessidade da sua empresa ou do seu perfil como parceiro.</p>
+
+    <div class="form-wrap">
+      <form id="formB2B" netlify>
+        <div class="form-grid">
+          <div class="form-field full">
+            <label for="nome">Nome completo *</label>
+            <input type="text" id="nome" name="nome" required>
+          </div>
+          <div class="form-field">
+            <label for="empresa">Empresa</label>
+            <input type="text" id="empresa" name="empresa">
+          </div>
+          <div class="form-field">
+            <label for="cargo">Cargo</label>
+            <input type="text" id="cargo" name="cargo">
+          </div>
+          <div class="form-field">
+            <label for="email">E-mail *</label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="form-field">
+            <label for="whatsapp">WhatsApp *</label>
+            <input type="tel" id="whatsapp" name="whatsapp" required>
+          </div>
+          <div class="form-field full">
+            <label for="interesse">Tenho interesse em *</label>
+            <select id="interesse" name="interesse" required>
+              <option value="">Selecione...</option>
+              <option value="empresa">Compra Programada para minha empresa</option>
+              <option value="parceiro">Ser um parceiro vendedor</option>
+              <option value="ambos">Ambos</option>
+            </select>
+          </div>
+          <div class="form-field full">
+            <label for="mensagem">Conte um pouco sobre sua necessidade</label>
+            <textarea id="mensagem" name="mensagem" placeholder="Ex: preciso renovar 3 caminhões, ou quero começar como parceiro..."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="form-submit">Enviar solicitação</button>
+        <p class="form-disclaimer">
+          Seus dados estão seguros. Entraremos em contato pelo WhatsApp informado. Ao enviar, você concorda em receber comunicações da GHR Compra Programada.
+        </p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="container">
+    <div class="section-tag">// Dúvidas frequentes</div>
+    <h2>Direto ao <span>ponto.</span></h2>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q">A GHR atende empresas de qual porte?</div>
+        <div class="faq-a">Atendemos desde MEI e autônomos até transportadoras de médio porte. Cada empresa tem um plano adaptado ao seu fluxo de caixa e à sua necessidade de frota.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Como funciona a análise de crédito para empresas?</div>
+        <div class="faq-a">A análise é flexível e humana. Avaliamos o perfil da empresa caso a caso, considerando faturamento, tempo de operação e necessidade real. Não há descarte automático por sistema.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Posso usar o consórcio para renovar frota e não só ampliar?</div>
+        <div class="faq-a">Sim. Muitas transportadoras usam a Compra Programada como ferramenta de renovação constante: enquanto uma cota é usada para comprar o veículo novo, a venda do antigo ajuda a amortizar a próxima parcela. É gestão de frota com previsibilidade.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Quais são as comissões para parceiros?</div>
+        <div class="faq-a">1,5% sobre o valor da cota até R$ 800 mil, e 2% acima disso. O pagamento é quinzenal, após a confirmação da primeira parcela pelo cliente.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Preciso ter CNPJ para ser parceiro?</div>
+        <div class="faq-a">Não. Pessoa física com experiência em vendas, boa comunicação e alinhamento com os valores GHR pode se tornar parceira. O contrato inicial é de 3 meses, não-exclusivo, passando a exclusivo após registro formal.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">A GHR tem certificação e autorização?</div>
+        <div class="faq-a">Sim. Somos representantes autorizados da CRED CAR e de outras administradoras reguladas. Temos certificação ABAC PCA-10 e atuamos com base em Sete Lagoas/MG, com atendimento local e humano.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Qual a diferença entre consórcio e leasing para empresas?</div>
+        <div class="faq-a">O leasing tem juros embutidos e exige análise rígida. O consórcio trabalha com taxa de administração e oferece data de entrega em contrato. Para empresas que podem planejar a aquisição, o consórcio é mais econômico no longo prazo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q">Como faço para começar?</div>
+        <div class="faq-a">Preencha o formulário acima ou chame direto no WhatsApp (31) 9 7174-6067. Vamos entender sua necessidade e montar uma proposta personalizada sem compromisso.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-final">
+  <div class="container">
+    <div class="section-tag" style="color: var(--verde);">// Próximo passo</div>
+    <h2>Sua frota começa com <span>um plano.</span></h2>
+    <p>Fale com um especialista e receba uma proposta corporativa personalizada. Sem compromisso.</p>
+    <a href="https://wa.me/5531971746067?text=Ol%C3%A1%21%20Vim%20pelo%20site%20B2B%20da%20GHR%20e%20quero%20uma%20proposta%20corporativa." class="btn btn-primary" target="_blank">Chamar no WhatsApp</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">
+        <span class="logo-diamond">◆</span> GHR
+        <span style="font-weight:400; opacity:0.7; font-size:14px; margin-left:4px;">Compra Programada</span>
+      </div>
+      <div class="footer-info">
+        <strong>Gustavo Henrique Rocha</strong><br>
+        Representante autorizado CRED CAR<br>
+        Certificação ABAC PCA-10<br>
+        Sete Lagoas, MG
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Contato</h5>
+      <a href="https://wa.me/5531971746067" target="_blank">(31) 9 7174-6067</a>
+      <a href="https://instagram.com/ghrcompraprogramada" target="_blank">@ghrcompraprogramada</a>
+    </div>
+    <div class="footer-col">
+      <h5>Navegação</h5>
+      <a href="/">Início</a>
+      <a href="/moto.html">Moto</a>
+      <a href="/carro.html">Carro</a>
+      <a href="/imovel.html">Imóvel</a>
+      <a href="/pesados.html">Pesados</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    A Compra Programada é uma modalidade de consórcio. Crédito sujeito a análise e aprovação. Este site não representa promessa de aprovação nem de antecipação de contemplação fora das regras contratuais descritas acima.
+  </div>
+</footer>
+
+<a href="https://wa.me/5531971746067" class="wa-float" target="_blank" aria-label="WhatsApp">💬</a>
+
+<script>
+// TABELAS PARA SIMULADOR CORPORATIVO
+const TABELAS = {
+  pesados: {
+    nome: "Veículos Pesados",
+    prazo: 120,
+    conv: [
+      [220000, 24383.33, 2383.33], [240000, 26600.00, 2600.00],
+      [260000, 28816.66, 2816.66], [280000, 31033.33, 3033.33],
+      [300000, 33250.00, 3250.00], [320000, 35466.66, 3466.66],
+      [340000, 37683.33, 3683.33], [360000, 39900.00, 3900.00],
+      [380000, 42116.66, 4116.66], [400000, 44333.33, 4333.33],
+      [420000, 46550.00, 4550.00], [440000, 48766.66, 4766.66],
+      [460000, 50983.33, 4983.33], [480000, 53200.00, 5200.00],
+      [500000, 55416.66, 5416.66]
+    ],
+    flex: [
+      [220000, 2200.00, 2607.40], [240000, 2400.00, 2844.44],
+      [260000, 2600.00, 3081.48], [280000, 2800.00, 3318.51],
+      [300000, 3000.00, 3555.55], [320000, 3200.00, 3792.59],
+      [340000, 3400.00, 4029.62], [360000, 3600.00, 4266.66],
+      [380000, 3800.00, 4503.70], [400000, 4000.00, 4740.76],
+      [420000, 4200.00, 4977.77], [440000, 4400.00, 5214.81],
+      [460000, 4600.00, 5451.85], [480000, 4800.00, 5688.88],
+      [500000, 5000.00, 5925.92]
+    ]
+  },
+  carro: {
+    nome: "Automóvel",
+    prazo: 120,
+    conv: [
+      [100000, 1000.00, 1296.29], [120000, 1200.00, 1555.55],
+      [130000, 1300.00, 1685.18], [140000, 1400.00, 1814.81],
+      [150000, 1500.00, 1944.44], [160000, 1600.00, 2074.07],
+      [170000, 1700.00, 2203.70], [180000, 1800.00, 2333.33],
+      [190000, 1900.00, 2462.96], [200000, 2000.00, 2592.59]
+    ],
+    flex: []
+  },
+  moto: {
+    nome: "Motocicleta",
+    prazo: 80,
+    conv: [
+      [20000, 2750.00, 350.00], [25000, 3435.00, 435.00],
+      [30000, 4125.00, 525.00], [35000, 4812.00, 612.00],
+      [40000, 5500.00, 700.00], [45000, 6188.00, 788.00],
+      [50000, 6875.00, 875.00], [55000, 7562.00, 962.00],
+      [60000, 8250.00, 1050.00]
+    ],
+    flex: []
+  }
+};
+
+const WHATSAPP = "5531971746067";
+const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
+
+function acharLinha(tabela, valor) {
+  let melhor = tabela[0];
+  for (const d of tabela) { if (valor >= d[0]) melhor = d; }
+  return melhor;
+}
+
+function calcular() {
+  const mod = document.getElementById('modalidade').value;
+  const credito = +document.getElementById('credito').value || 300000;
+  const qtd = +document.getElementById('qtd').value || 1;
+  const tipo = document.getElementById('plano').value;
+  const t = TABELAS[mod];
+
+  let tabela;
+  if (tipo === "FLEX" && t.flex.length > 0) {
+    tabela = t.flex;
+  } else {
+    tabela = t.conv;
+  }
+
+  const [cred, v1, v2] = acharLinha(tabela, credito);
+  let parcelaInicial, parcelaPrincipal, totalPago, labelIni, labelPrin;
+
+  if (tipo === "FLEX" && t.flex.length > 0) {
+    parcelaInicial = v1; parcelaPrincipal = v2;
+    labelIni = "1º a 12º parcela"; labelPrin = "13º a " + t.prazo + "º parcela";
+    totalPago = (parcelaInicial * 12) + (parcelaPrincipal * (t.prazo - 12));
+  } else {
+    parcelaInicial = v1; parcelaPrincipal = v2;
+    labelIni = "1ª parcela"; labelPrin = "2ª a " + t.prazo + "ª parcela";
+    totalPago = parcelaInicial + (parcelaPrincipal * (t.prazo - 1));
+  }
+
+  document.getElementById('labelInicial').textContent = labelIni;
+  document.getElementById('labelPrincipal').textContent = labelPrin;
+  document.getElementById('outInicial').textContent = fmt(parcelaInicial);
+  document.getElementById('outPrincipal').textContent = fmt(parcelaPrincipal);
+  document.getElementById('outPrazo').textContent = t.prazo + " meses";
+  document.getElementById('outTotal').textContent = fmt(totalPago);
+  document.getElementById('outTotalFrota').textContent = fmt(totalPago * qtd);
+
+  const msg = encodeURIComponent(
+    `Olá! Simulei uma proposta corporativa no site da GHR.\n\n` +
+    `• Modalidade: ${t.nome}\n` +
+    `• Crédito por veículo: ${fmt(cred)}\n` +
+    `• Quantidade: ${qtd} veículo(s)\n` +
+    `• Plano: ${tipo === "FLEX" ? "Flex" : "Convencional"}\n` +
+    `• Parcela inicial: ${fmt(parcelaInicial)}\n` +
+    `• Parcela principal: ${fmt(parcelaPrincipal)}`
+  );
+  document.getElementById('ctaWhats').href = `https://wa.me/${WHATSAPP}?text=${msg}`;
+}
+
+document.getElementById('modalidade').addEventListener('change', () => {
+  const mod = document.getElementById('modalidade').value;
+  const t = TABELAS[mod];
+  const range = document.getElementById('creditoRange');
+  const input = document.getElementById('credito');
+  const min = t.conv[0][0], max = t.conv[t.conv.length-1][0];
+  range.min = min; range.max = max;
+  if (+input.value < min || +input.value > max) input.value = min;
+  range.value = input.value;
+  calcular();
+});
+document.getElementById('credito').addEventListener('input', e => {
+  document.getElementById('creditoRange').value = e.target.value;
+  calcular();
+});
+document.getElementById('creditoRange').addEventListener('input', e => {
+  document.getElementById('credito').value = e.target.value;
+  calcular();
+});
+document.getElementById('qtd').addEventListener('input', calcular);
+document.getElementById('plano').addEventListener('change', calcular);
+
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => q.parentElement.classList.toggle('open'));
+});
+
+calcular();
+</script>
+
+</body>
+</html>
