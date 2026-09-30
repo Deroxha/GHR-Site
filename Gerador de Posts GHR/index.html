@@ -228,13 +228,17 @@ input[type=file] { font-size: 13px; }
 // ============ TABELAS CRED CAR (mesmos dados do simulador do site) ============
 const TABELAS = {
   moto: {
+    // Veículos 80x (CRED CAR, 20/02/2026): [crédito, inicial A (1x), B (2x), C (3x), D (4x), restantes]
     dados: [
-      [20000,2750.00,350.00],[25000,3435.00,435.00],[30000,4125.00,525.00],
-      [35000,4812.00,612.00],[40000,5500.00,700.00],[45000,6188.00,788.00],
-      [50000,6875.00,875.00],[55000,7562.00,962.00],[60000,8250.00,1050.00],
-      [65000,8938.00,1138.00],[70000,9625.50,1225.50],[75000,10312.50,1312.50],
-      [80000,11000.00,1400.00],[85000,11688.00,1488.00],[90000,12375.00,1575.00],
-      [95000,13063.00,1663.00],[100000,13750.00,1750.00]
+      [20000,2750.00,1550.00,1150.00,950.00,350.00],[25000,3435.00,1935.00,1435.00,1185.00,435.00],
+      [30000,4125.00,2325.00,1725.00,1425.00,525.00],[35000,4812.00,2712.00,2012.00,1662.00,612.00],
+      [40000,5500.00,3100.00,2300.00,1900.00,700.00],[45000,6188.00,3488.00,2588.00,2138.00,788.00],
+      [50000,6875.00,3875.00,2875.00,2375.00,875.00],[55000,7562.00,4262.00,3162.00,2612.00,962.00],
+      [60000,8250.00,4650.00,3450.00,2850.00,1050.00],[65000,8938.00,5038.00,3738.00,3088.00,1138.00],
+      [70000,9625.50,5425.50,4025.50,3325.50,1225.50],[75000,10312.50,5812.50,4312.50,3562.50,1312.50],
+      [80000,11000.00,6200.00,4600.00,3800.00,1400.00],[85000,11688.00,6588.00,4888.00,4038.00,1488.00],
+      [90000,12375.00,6975.00,5175.00,4275.00,1575.00],[95000,13063.00,7363.00,5463.00,4513.00,1663.00],
+      [100000,13750.00,7750.00,5750.00,4750.00,1750.00]
     ]
   },
   carro: {
@@ -290,13 +294,14 @@ const TABELAS = {
   }
 };
 
-// seg = [qtd de parcelas com valor da coluna 2, qtd com valor da coluna 3]
+// seg = [qtd de parcelas iniciais, qtd de parcelas restantes]
+// ini / rest = coluna da linha com o valor de cada grupo (padrão 1 e 2)
 const PLANOS = {
   moto: {
-    A: { desc: "1 parcela alta + 79x", tab: "dados", seg: [1, 79] },
-    B: { desc: "2 parcelas altas + 78x", tab: "dados", seg: [2, 78] },
-    C: { desc: "3 parcelas altas + 77x", tab: "dados", seg: [3, 77] },
-    D: { desc: "4 parcelas altas + 76x", tab: "dados", seg: [4, 76] }
+    A: { desc: "1 parcela alta + 79x", tab: "dados", ini: 1, rest: 5, seg: [1, 79] },
+    B: { desc: "2 parcelas altas + 78x", tab: "dados", ini: 2, rest: 5, seg: [2, 78] },
+    C: { desc: "3 parcelas altas + 77x", tab: "dados", ini: 3, rest: 5, seg: [3, 77] },
+    D: { desc: "4 parcelas altas + 76x", tab: "dados", ini: 4, rest: 5, seg: [4, 76] }
   },
   carro: {
     MIX: { desc: "1º a 12º menor + 13º a 120º maior", tab: "dados", seg: [12, 108] }
@@ -377,7 +382,7 @@ function tabelaAtual() {
 function calcular() {
   const plano = PLANOS[st.mod][st.plano];
   const linha = tabelaAtual().find(l => l[0] === st.credito) || tabelaAtual()[0];
-  const segs = [{ n: plano.seg[0], v: linha[1] }, { n: plano.seg[1], v: linha[2] }];
+  const segs = [{ n: plano.seg[0], v: linha[plano.ini ?? 1] }, { n: plano.seg[1], v: linha[plano.rest ?? 2] }];
   const prazo = segs[0].n + segs[1].n;
   // "a partir de" só considera as parcelas que se repetem (12x ou mais)
   const aPartir = Math.min(...segs.filter(s => s.n >= 12).map(s => s.v));

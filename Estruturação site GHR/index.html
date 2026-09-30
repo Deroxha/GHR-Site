@@ -1031,6 +1031,20 @@ const TABELAS = {
   }
 };
 
+// Parcelas iniciais de cada plano da tabela CRED CAR 80x (veículos de R$ 20 a 100 mil, 20/02/2026)
+// crédito: [A (1x), B (2x), C (3x), D (4x)] — as restantes são a coluna 3 de TABELAS.moto.dados
+const INICIAIS_80X = {
+  20000: [2750.00, 1550.00, 1150.00, 950.00],   25000: [3435.00, 1935.00, 1435.00, 1185.00],
+  30000: [4125.00, 2325.00, 1725.00, 1425.00],  35000: [4812.00, 2712.00, 2012.00, 1662.00],
+  40000: [5500.00, 3100.00, 2300.00, 1900.00],  45000: [6188.00, 3488.00, 2588.00, 2138.00],
+  50000: [6875.00, 3875.00, 2875.00, 2375.00],  55000: [7562.00, 4262.00, 3162.00, 2612.00],
+  60000: [8250.00, 4650.00, 3450.00, 2850.00],  65000: [8938.00, 5038.00, 3738.00, 3088.00],
+  70000: [9625.50, 5425.50, 4025.50, 3325.50],  75000: [10312.50, 5812.50, 4312.50, 3562.50],
+  80000: [11000.00, 6200.00, 4600.00, 3800.00], 85000: [11688.00, 6588.00, 4888.00, 4038.00],
+  90000: [12375.00, 6975.00, 5175.00, 4275.00], 95000: [13063.00, 7363.00, 5463.00, 4513.00],
+  100000: [13750.00, 7750.00, 5750.00, 4750.00]
+};
+
 const WHATSAPP = "5531971746067";
 let estado = { mod: "moto", tipoAtual: "A" };
 const fmt = v => v.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL', minimumFractionDigits: 2 });
@@ -1090,11 +1104,11 @@ function calcular() {
   let parcelaInicial, parcelaPrincipal, totalPago, labelIni, labelPrin;
 
   if (estado.mod === "moto") {
-    const t = TABELAS.moto.tipos[estado.tipoAtual];
-    parcelaInicial = v1; parcelaPrincipal = v2;
-    labelIni = `${t.iniciais || (estado.tipoAtual === "A" ? 1 : estado.tipoAtual === "B" ? 2 : estado.tipoAtual === "C" ? 3 : 4)}x parcela inicial`;
-    labelPrin = `${t.restantes || (estado.tipoAtual === "A" ? 79 : estado.tipoAtual === "B" ? 78 : estado.tipoAtual === "C" ? 77 : 76)}x parcela`;
-    const n = estado.tipoAtual === "A" ? 1 : estado.tipoAtual === "B" ? 2 : estado.tipoAtual === "C" ? 3 : 4;
+    const n = { A: 1, B: 2, C: 3, D: 4 }[estado.tipoAtual] || 1;
+    // cada plano tem o próprio valor de parcela inicial (tabela CRED CAR 80x)
+    parcelaInicial = INICIAIS_80X[cred][n - 1]; parcelaPrincipal = v2;
+    labelIni = `${n}x parcela inicial`;
+    labelPrin = `${80 - n}x parcela`;
     totalPago = (parcelaInicial * n) + (parcelaPrincipal * (80 - n));
   } else if (estado.mod === "carro") {
     parcelaInicial = v1; parcelaPrincipal = v2;
