@@ -1,3 +1,7 @@
 # Endereço antigo do Netlify → domínio próprio (links antigos e anúncios continuam funcionando)
 https://ghrcompraprogramada.netlify.app/*  https://ghrcompraprogramada.com/:splat  301!
 http://ghrcompraprogramada.netlify.app/*   https://ghrcompraprogramada.com/:splat  301!
+
+# Arquivo de instruções do Claude Code fica na pasta, mas não pode ser público
+/CLAUDE.md  /404  404!
+/claude.md  /404  404!
